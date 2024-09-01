@@ -1,11 +1,12 @@
+import Drawer from "./components/Drawer"
 import Nav from "./components/shared/Nav"
 
 export default function Home() {
-
   return (
     <>
-      <Nav />
+      <Drawer Nav={Nav}>
+
+      </Drawer>
     </>
   )
 }
-
