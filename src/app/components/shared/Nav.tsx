@@ -11,7 +11,7 @@ export type NavProps = {
 export default function Nav({ drawerRef }: NavProps) {
 
   return (
-    <div className="h-28 flex flex-row items-center p-4 bg-gray-100">
+    <header className="h-28 flex flex-row items-center p-4 bg-gray-100">
       <div className="flex-grow">
         <div className="text-xl font-bold">Logo</div>
       </div>
@@ -21,12 +21,13 @@ export default function Nav({ drawerRef }: NavProps) {
           return <button className="btn hover:bg-gray-200 p-2 rounded">{item.name}</button>
         })}
       </div>
-      <div className="">
-        <button onClick={() => drawerRef.current?.click()}>
+
+      <div>
+        <button className='btn hover:bg-gray-200 p-2 rounded' onClick={() => drawerRef.current?.click()}>
           <FontAwesomeIcon icon={faBars} width={16} height={16} />
         </button>
       </div>
-    </div>
+    </header>
   )
 }
 
