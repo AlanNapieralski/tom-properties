@@ -4,24 +4,27 @@ export default function Welcome() {
 
   return (
     <section className="flex flex-col">
-      {/*  NOTE: Make an overlay and fix the text size to be smoothly adjusting to the image  */}
-      <div className='absolute blue opacity-20 w-full h-full'></div>
-      <div className='relative'>
-        <h1 className='absolute max-w-full w-full top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-5xl flex items-center justify-center text-white' >Main Welcome text on the page</h1>
+      <div className='relative overflow-hidden'>
+        <div className='absolute inset-0 bg-gradient-to-b from-primary via-primary to-transparent opacity-30'></div>
+        <h1 className="absolute inset-0 flex items-center justify-center font-bold text-5xl text-white drop-shadow-lg">
+          Main Welcome Text on the Page
+        </h1>
 
         <Image
           src="/assets/images/welcome-image.jpeg"
           alt='properties'
           width={1366}
           height={788}
-          className='max-w-full w-full h-[700px] object-cover object-center'
+          className='max-w-full w-full h-[650px] object-cover object-center'
         />
       </div>
 
-      <div className="flex">
-        <p>Lorem ipsum</p>
-        <p>Lorem ipsum</p>
-        <p>Lorem ipsum</p>
+      <div className="flex justify-center items-center py-2 bg-primary text-white">
+        <p className='px-4 font-semibold uppercase'>lorem ipsum</p>
+        <div className="dot-white"></div>
+        <p className='px-4 font-semibold uppercase'>LOREM IPSUM</p>
+        <div className="dot-white"></div>
+        <p className='px-4 font-semibold uppercase'>LOREM IPSUM</p>
       </div>
     </section >
   )
