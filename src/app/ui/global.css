@@ -13,10 +13,16 @@
     display: inline-block;
   }
  .dot-white {
-    height: 5px;
-    width: 5px;
+    height: 5px; width: 5px;
     background-color: white;
     border-radius: 50%;
     display: inline-block;
+  }
+  .wrapper {
+    width: 1360px;
+    margin: auto;
+  }
+  .shadow-bottom {
+      box-shadow: 0 10px 20px -5px rgba(115,115,115,0.75);
   }
 }
