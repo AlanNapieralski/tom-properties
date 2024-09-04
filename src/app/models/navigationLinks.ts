@@ -1,23 +1,33 @@
 const navLinks = [
   {
     name: 'Home',
-    url: '/'
+    url: '/',
+    color: 'primary'
   },
   {
     name: 'For Landlords',
-    url: '/landlords'
+    url: '/landlords',
+    color: 'secondary'
   },
   {
     name: 'For Tenants',
-    url: '/tenants'
+    url: '/tenants',
+    color: 'secondary'
+  },
+  {
+    name: 'For investors',
+    url: '/investors',
+    color: 'secondary'
   },
   {
     name: 'Value my property',
-    url: '/value-my-property'
+    url: '/value-my-property',
+    color: 'primary'
   },
   {
     name: 'Contact Us',
-    url: ''
+    url: '#contact-us',
+    color: 'primary'
   }
 ]
 

@@ -13,7 +13,7 @@ export type NavProps = {
 export default function Nav({ drawerRef }: NavProps) {
 
   return (
-    <header className="h-32 flex items-center justify-between p-4 bg-secondary-content shadow-bottom z-50">
+    <header className="h-28 flex items-center justify-between p-4 bg-secondary shadow-bottom z-50">
       <div className="w-64">
         <Image
           src='/assets/logo.png'
@@ -25,19 +25,17 @@ export default function Nav({ drawerRef }: NavProps) {
       <div className='flex flex-row gap-12'>
         <div className="flex-grow flex justify-center space-x-4">
           {navLinks.map((item, index) => {
-            return <button key={index} className="btn shadow-md bg-secondary-content hover:bg-secondary p-2 px-6 rounded border-none">
-              <Link
-                href={item.url}
-              >
-                {item.name}
-              </Link>
-            </button>
+            return <Link key={index} className={`btn shadow-md  p-2 px-6 rounded border-none ${item.color === 'primary' ? 'bg-primary text-secondary hover:bg-secondary hover:text-primary' : 'bg-secondary text-primary hover:bg-primary hover:text-secondary'}`}
+              href={item.url}
+            >
+              {item.name}
+            </Link>
           })}
         </div>
 
-        <div className=''>
-          <button className='aspect-square h-full bg-secondary-content hover:bg-secondary p-2 rounded border-none' onClick={() => drawerRef.current?.click()}>
-            <FontAwesomeIcon icon={faBars} width={32} className='h-full' />
+        <div className='group'>
+          <button className='aspect-square h-full bg-secondary hover:bg-secondary-foreground p-2 rounded border-none' onClick={() => drawerRef.current?.click()}>
+            <FontAwesomeIcon icon={faBars} width={32} className='h-full group-hover:text-secondary' />
           </button>
         </div>
       </div>

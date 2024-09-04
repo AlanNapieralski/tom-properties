@@ -12,13 +12,12 @@ type DrawerProps = {
 export default function Drawer({ Trigger, children }: DrawerProps) {
 
   const drawerRef = useRef(null)
-
+  // FIX: drawer side is not disappearing after using tab. might  want to change to shadcn one
   return (
     <>
       <div className="drawer drawer-end">
         <input ref={drawerRef} id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-          { /* FIX: This is probably not the way to go */}
           <Trigger drawerRef={drawerRef} />
           {children}
         </div>

@@ -9,7 +9,7 @@ export default function Welcome() {
         <h1 className="absolute inset-x-0 top-56 flex items-center justify-center font-bold text-5xl text-white drop-shadow-lg">
           Main Welcome Text on the Page
         </h1>
-
+        {/* NOTE: Make sure to make it into two alternating images  */}
         <Image
           src="/assets/images/welcome-image.jpeg"
           alt='properties'
