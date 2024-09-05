@@ -1,4 +1,16 @@
+import type { Metadata } from 'next'
 import './ui/global.css'
+import { Lato } from 'next/font/google'
+
+const lato = Lato({
+  weight: ["400", "700"],
+  subsets: ['latin'],
+})
+
+export const metadata: Metadata = {
+  title: "Tom Properties",
+  description: "Services for landlords, tenants and investors"
+}
 
 export default function RootLayout({
   children,
@@ -7,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={lato.className}>{children}</body>
     </html>
   )
 }

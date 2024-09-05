@@ -30,7 +30,7 @@ export default function Welcome() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex(prevIndex => 1 - prevIndex)
-    }, 5000)
+    }, 8000)
     return () => {
       clearInterval(timer);
     }
@@ -44,7 +44,7 @@ export default function Welcome() {
             <Image
               key={idx}
               {...img}
-              className={`absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-1000 ease-in-out ${index === idx ? "opacity-100" : "opacity-0"}`}
+              className={`absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-2000 ease-in-out ${index === idx ? "opacity-100" : "opacity-0"}`}
             />
           ))}
         </div>
@@ -55,11 +55,11 @@ export default function Welcome() {
       </div>
 
       <div className="flex justify-center items-center py-2 bg-primary text-white shadow-bottom">
-        <p className='px-4 font-semibold uppercase'>lorem ipsum</p>
+        <p className='px-4 font-bold uppercase'>lorem ipsum</p>
         <div className="dot-white"></div>
-        <p className='px-4 font-semibold uppercase'>LOREM IPSUM</p>
+        <p className='px-4 font-bold uppercase'>LOREM IPSUM</p>
         <div className="dot-white"></div>
-        <p className='px-4 font-semibold uppercase'>LOREM IPSUM</p>
+        <p className='px-4 font-bold uppercase'>LOREM IPSUM</p>
       </div>
 
     </section >

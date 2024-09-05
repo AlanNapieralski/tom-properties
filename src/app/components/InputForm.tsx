@@ -61,9 +61,9 @@ export default function InputForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-semibold">Name</FormLabel>
+                <FormLabel className="text-xl font-bold">Name</FormLabel>
                 <FormControl>
-                  <Input className="px-2 border-2 border-primary " type="text" {...field} />
+                  <Input className="p-4 border-2 border-primary " type="text" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -74,9 +74,9 @@ export default function InputForm() {
             name='email'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-semibold">Email</FormLabel>
+                <FormLabel className="text-xl font-bold">Email</FormLabel>
                 <FormControl>
-                  <Input className="px-2 border-2 border-primary" type="email" {...field} />
+                  <Input className="p-4 border-2 border-primary" type="email" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -87,11 +87,11 @@ export default function InputForm() {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-semibold">Message</FormLabel>
+                <FormLabel className="text-xl font-bold">Message</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Tell us how can we help"
-                    className="px-2 h-32 border-2 border-primary resize-none"
+                    className="p-4 h-32 border-2 border-primary resize-none"
                     {...field}
                   />
                 </FormControl>

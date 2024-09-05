@@ -15,8 +15,6 @@ import {
 import navigationLinks from "../models/navigationLinks"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
-import { X } from "lucide-react"
-import { useState } from "react"
 
 type SideNavProps = {
   triggerButton: React.ReactNode
@@ -34,16 +32,15 @@ export default function SideNav({ triggerButton }: SideNavProps) {
         </SheetHeader>
         <div className="flex flex-col py-8">
           {navigationLinks.map((item, index) => (
-            <>
+            <div key={index}>
               <Separator className="border" />
               <Link
                 href={item.url}
-                key={index}
-                className="text-xl font-semibold rounded hover:bg-primary hover:text-secondary p-4 transition-colors duration-300 ease-out"
+                className="text-xl font-bold rounded hover:bg-primary hover:text-secondary p-4 transition-colors duration-300 ease-out"
               >
                 {item.name}
               </Link>
-            </>
+            </div>
           ))}
         </div>
         <SheetFooter>

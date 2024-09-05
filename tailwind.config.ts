@@ -9,6 +9,10 @@ const config: Config = {
 	],
 	theme: {
 		extend: {
+			transitionDuration: {
+				'2000': '2000ms',
+				'3000': '3000ms',
+			},
 			colors: {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
