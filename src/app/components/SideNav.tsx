@@ -1,7 +1,4 @@
 'use client'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -15,6 +12,7 @@ import {
 import navigationLinks from "../models/navigationLinks"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
+import React from "react"
 
 type SideNavProps = {
   triggerButton: React.ReactNode
@@ -32,7 +30,7 @@ export default function SideNav({ triggerButton }: SideNavProps) {
         </SheetHeader>
         <div className="flex flex-col py-8">
           {navigationLinks.map((item, index) => (
-            <div key={index}>
+            <React.Fragment key={index}>
               <Separator className="border" />
               <Link
                 href={item.url}
@@ -40,7 +38,7 @@ export default function SideNav({ triggerButton }: SideNavProps) {
               >
                 {item.name}
               </Link>
-            </div>
+            </React.Fragment>
           ))}
         </div>
         <SheetFooter>
