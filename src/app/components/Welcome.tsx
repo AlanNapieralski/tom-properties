@@ -1,22 +1,57 @@
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
 
 export default function Welcome() {
 
+  type ImageProps = {
+    src: string,
+    alt: string,
+    width?: number,
+    height?: number
+  }
+
+  const images: ImageProps[] = [
+    {
+      src: "/assets/images/welcome-slider/welcome-image.jpeg",
+      alt: 'properties',
+      width: 1366,
+      height: 788
+    },
+
+    {
+      src: "/assets/images/welcome-slider/welcome-image2.jpg",
+      alt: 'more properties',
+      width: 2000,
+      height: 700
+    },
+  ]
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex(prevIndex => 1 - prevIndex)
+    }, 5000)
+    return () => {
+      clearInterval(timer);
+    }
+  }, [])
+
   return (
     <section className="flex flex-col pb-16">
-      <div className='relative overflow-hidden'>
+      <div className='relative overflow-hidden h-[650px]'>
+        <div className='absolute inset-0 h-full'>
+          {images.map((img, idx) => (
+            <Image
+              key={idx}
+              {...img}
+              className={`absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-1000 ease-in-out ${index === idx ? "opacity-100" : "opacity-0"}`}
+            />
+          ))}
+        </div>
         <div className='absolute inset-0 bg-gradient-to-b from-primary via-primary to-transparent opacity-30'></div>
         <h1 className="absolute inset-x-0 top-56 flex items-center justify-center font-bold text-5xl text-white drop-shadow-lg">
           Main Welcome Text on the Page
         </h1>
-        {/* NOTE: Make sure to make it into two alternating images  */}
-        <Image
-          src="/assets/images/welcome-image.jpeg"
-          alt='properties'
-          width={1366}
-          height={788}
-          className='max-w-full w-full h-[650px] object-cover object-center'
-        />
       </div>
 
       <div className="flex justify-center items-center py-2 bg-primary text-white shadow-bottom">

@@ -13,15 +13,8 @@ export default function Home() {
 
   return (
     <>
-      <SideNav
-        triggerButton={
-          <Button
-            className="absolute inset-y-0 right-0"
-          >
-            Open
-          </Button>
-        }
-      />
+      <Welcome />
+
     </>
   );
 }
