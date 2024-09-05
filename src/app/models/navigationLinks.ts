@@ -1,4 +1,4 @@
-const navLinks = [
+export default [
   {
     name: 'Home',
     url: '/',
@@ -30,5 +30,3 @@ const navLinks = [
     color: 'primary'
   }
 ]
-
-export default navLinks

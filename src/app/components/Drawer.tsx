@@ -5,7 +5,7 @@ import navLinks from '../models/navigationLinks'
 import Link from 'next/link'
 
 type DrawerProps = {
-  Trigger: React.ComponentType<NavProps>
+  Trigger: React.ElementType<NavProps>
   children: React.ReactNode
 }
 

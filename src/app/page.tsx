@@ -1,3 +1,4 @@
+'use client'
 import AboutUs from "./components/AboutUs"
 import Dashboard from "./components/Dashboard"
 import Drawer from "./components/Drawer"
@@ -5,19 +6,22 @@ import Nav from "./components/shared/Nav"
 import Welcome from "./components/Welcome"
 import ContactUs from "./components/ContactUs"
 import Footer from "./components/shared/Footer"
+import SideNav from './components/SideNav'
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
+
   return (
-    <Drawer Trigger={Nav}>
-      <Welcome></Welcome>
-      <div className="wrapper">
-        <AboutUs />
-      </div>
-      <Dashboard />
-      <div className="wrapper">
-        <ContactUs />
-      </div>
-      <Footer />
-    </Drawer>
-  )
+    <>
+      <SideNav
+        triggerButton={
+          <Button
+            className="absolute inset-y-0 right-0"
+          >
+            Open
+          </Button>
+        }
+      />
+    </>
+  );
 }
