@@ -1,30 +1,10 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { welcome, welcomeImages as images } from '@/models/homeContent'
+
 
 export default function Welcome() {
 
-  type ImageProps = {
-    src: string,
-    alt: string,
-    width?: number,
-    height?: number
-  }
-
-  const images: ImageProps[] = [
-    {
-      src: "/assets/images/welcome-slider/welcome-image.jpeg",
-      alt: 'properties',
-      width: 1366,
-      height: 788
-    },
-
-    {
-      src: "/assets/images/welcome-slider/welcome-image2.jpg",
-      alt: 'more properties',
-      width: 2000,
-      height: 700
-    },
-  ]
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -50,16 +30,16 @@ export default function Welcome() {
         </div>
         <div className='absolute inset-0 bg-gradient-to-b from-primary via-primary to-transparent opacity-30'></div>
         <h1 className="absolute inset-x-0 top-56 flex items-center justify-center font-bold text-5xl text-white drop-shadow-lg">
-          Main Welcome Text on the Page
+          {welcome.title}
         </h1>
       </div>
 
       <div className="flex justify-center items-center py-2 bg-primary text-white shadow-bottom">
-        <p className='px-4 font-bold uppercase'>lorem ipsum</p>
+        <p className='px-4 font-bold uppercase'>{welcome.strip[0]}</p>
         <div className="dot-white"></div>
-        <p className='px-4 font-bold uppercase'>LOREM IPSUM</p>
+        <p className='px-4 font-bold uppercase'>{welcome.strip[1]}</p>
         <div className="dot-white"></div>
-        <p className='px-4 font-bold uppercase'>LOREM IPSUM</p>
+        <p className='px-4 font-bold uppercase'>{welcome.strip[2]}</p>
       </div>
 
     </section >

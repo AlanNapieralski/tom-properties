@@ -1,5 +1,5 @@
 import Image from "next/image"
-import InputForm from "./InputForm"
+import InputForm from "@/components/ui/InputForm"
 
 export default function ContactUs() {
 

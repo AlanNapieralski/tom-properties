@@ -22,8 +22,10 @@ const FormSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-
   email: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  tel: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
   message: z.string().min(2, {
@@ -37,6 +39,7 @@ export default function InputForm() {
     defaultValues: {
       name: "",
       email: "",
+      tel: "",
       message: "",
     },
   })
@@ -63,24 +66,40 @@ export default function InputForm() {
               <FormItem>
                 <FormLabel className="text-xl font-bold">Name</FormLabel>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary " type="text" {...field} />
+                  <Input className="p-4 border-2 border-primary" type="text" {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
+          <div className="flex justify-between gap-12">
 
-          <FormField
-            control={form.control}
-            name='email'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xl font-bold">Email</FormLabel>
-                <FormControl>
-                  <Input className="p-4 border-2 border-primary" type="email" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name='email'
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel className="text-xl font-bold">Email</FormLabel>
+                  <FormControl>
+                    <Input className="p-4 border-2 border-primary" type="email" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name='tel'
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel className="text-xl font-bold">Phone Number</FormLabel>
+                  <FormControl>
+                    <Input className="p-4 border-2 border-primary" type="tel" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+          </div>
 
           <FormField
             control={form.control}

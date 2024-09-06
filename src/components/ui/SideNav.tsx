@@ -9,7 +9,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import navigationLinks from "../models/navigationLinks"
+import navigationLinks from "@/models/navigationLinks"
+import { title } from "@/models/metadata"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 import React from "react"
@@ -26,7 +27,7 @@ export default function SideNav({ triggerButton }: SideNavProps) {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Sheet Title</SheetTitle>
+          <SheetTitle className="text-2xl">{title}</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col py-8">
           {navigationLinks.map((item, index) => (

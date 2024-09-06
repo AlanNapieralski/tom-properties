@@ -1,5 +1,6 @@
+import '@/styles/global.css'
+import { title, description } from '@/models/metadata'
 import type { Metadata } from 'next'
-import './ui/global.css'
 import { Lato } from 'next/font/google'
 
 const lato = Lato({
@@ -8,8 +9,8 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: "Tom Properties",
-  description: "Services for landlords, tenants and investors"
+  title,
+  description
 }
 
 export default function RootLayout({

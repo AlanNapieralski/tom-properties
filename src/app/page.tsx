@@ -1,10 +1,10 @@
 'use client'
-import AboutUs from "./components/AboutUs"
-import Dashboard from "./components/Dashboard"
-import Nav from "./components/shared/Nav"
-import Welcome from "./components/Welcome"
-import ContactUs from "./components/ContactUs"
-import Footer from "./components/shared/Footer"
+import AboutUs from "@/components/sections/AboutUs"
+import Dashboard from "@/components/sections/Dashboard"
+import Nav from "@/components/sections/shared/Nav"
+import Welcome from "@/components/sections/Welcome"
+import ContactUs from "@/components/sections/ContactUs"
+import Footer from "@/components/sections/shared/Footer"
 
 export default function Home() {
 
