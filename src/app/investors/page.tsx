@@ -1,6 +1,6 @@
 import TopPanel from "@/components/sections/shared/TopPanel"
 import SidePageContactUs from "@/components/sections/shared/SidePageContactUs"
-import { main, landlordInfo } from "@/models/landlordContent"
+import { main, investorsInfo } from "@/models/investorsContent"
 import ArticleSnippetWithButton from "@/components/ui/ArticleSnippetWithButton"
 
 export default function Landlords() {
@@ -9,7 +9,7 @@ export default function Landlords() {
     <>
       <TopPanel title={main.title} />
       <div className="wrapper">
-        <ArticleSnippetWithButton title={landlordInfo.title} text={landlordInfo.text} buttonTitle="Interested?" action="#side-contact-us" />
+        <ArticleSnippetWithButton title={investorsInfo.title} text={investorsInfo.text} buttonTitle="Interested?" action="#side-contact-us" />
         <SidePageContactUs />
       </div>
     </>

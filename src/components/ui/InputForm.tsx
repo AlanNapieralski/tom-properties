@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { toast } from "@/hooks/use-toast"
-import { Button } from "@/components/ui/button"
+import Button from "@/components/ui/CustomButton"
 import {
   Form,
   FormControl,
@@ -119,7 +119,7 @@ export default function InputForm() {
           />
         </div>
 
-        <Button type="submit" className="w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary">Submit</Button>
+        <Button type='button' buttonType="submit" action={(() => null)} className="w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary">Submit</Button>
       </form>
     </Form >
   )

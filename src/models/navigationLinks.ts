@@ -1,32 +1,40 @@
-export default [
+export type NavLinkType = {
+  name: string
+  url: string
+  theme: 'dark' | 'light'
+}
+
+const navLinks: NavLinkType[] = [
   {
     name: 'Home',
     url: '/',
-    color: 'primary'
+    theme: 'dark'
   },
   {
     name: 'For Landlords',
     url: '/landlords',
-    color: 'secondary'
+    theme: 'light'
   },
   {
     name: 'For Tenants',
     url: '/tenants',
-    color: 'secondary'
+    theme: 'light'
   },
   {
     name: 'For investors',
     url: '/investors',
-    color: 'secondary'
+    theme: 'light'
   },
   {
     name: 'Value my property',
     url: '/value-my-property',
-    color: 'primary'
+    theme: 'dark'
   },
   {
     name: 'Contact Us',
     url: '#contact-us',
-    color: 'primary'
+    theme: 'dark'
   }
 ]
+
+export default navLinks
