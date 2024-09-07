@@ -15,12 +15,11 @@ export const metadata: Metadata = {
   description
 }
 
-export default function RootLayout({ children,
-  navPosition = 'sticky'
-}: {
-  children: React.ReactNode
-  navPosition?: 'sticky' | 'fixed'
-}) {
+export default function RootLayout({ children, navPosition = "sticky" }:
+  {
+    children: React.ReactNode
+    navPosition: 'sticky' | 'fixed'
+  }) {
   return (
     <html lang="en">
       <body className={lato.className}>
