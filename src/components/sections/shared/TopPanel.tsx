@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { welcomeImages as image } from '@/models/homeContent'
+import { welcomeImages as image } from '@/models/home-content'
 import { useEffect, useState, useRef } from 'react'
 
 export default function TopPanel({ title }: { title: string }) {

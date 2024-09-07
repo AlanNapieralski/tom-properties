@@ -1,5 +1,5 @@
 import '@/styles/global.css'
-import { title, description } from '@/models/metadata'
+import { title, description } from '@/models/site-metadata'
 import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
 import Nav from '@/components/sections/shared/Nav'

@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Combobox } from './Combobox'
-import { valuationTypes, propertyTypes } from '@/models/valuePropertyContent'
+import { valuationTypes, propertyTypes } from '@/models/valueProperty-content'
 
 export default function ValuePropertyForm({ className = '' }) {
 

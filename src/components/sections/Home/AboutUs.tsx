@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { aboutUs } from "@/models/homeContent";
+import { aboutUs } from "@/models/home-content";
 import Button from '@/components/ui/CustomButton'
 
 export default function AboutUs() {

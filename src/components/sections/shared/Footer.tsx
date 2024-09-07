@@ -1,4 +1,4 @@
-import { fullTitle, description } from "@/models/metadata"
+import { fullTitle, description } from "@/models/site-metadata"
 
 export default function Footer({ className = "" }) {
   return (

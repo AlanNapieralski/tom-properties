@@ -1,6 +1,6 @@
 import TopPanel from "@/components/sections/shared/TopPanel"
 import SidePageContactUs from "@/components/sections/shared/SidePageContactUs"
-import { main, tenantInfo } from "@/models/tenantContent"
+import { main, tenantInfo } from "@/models/tenant-content"
 import ArticleSnippetWithButton from "@/components/ui/ArticleSnippetWithButton"
 
 export default function Landlords() {

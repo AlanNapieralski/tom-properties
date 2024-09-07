@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import navLinks from '@/models/navigationLinks'
+import navLinks from '@/models/navigation-links'
 import Image from 'next/image'
 import SideNav from '@/components/ui/SideNav'
 import Button from '@/components/ui/CustomButton'

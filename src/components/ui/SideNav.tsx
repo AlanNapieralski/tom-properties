@@ -9,8 +9,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import navigationLinks from "@/models/navigationLinks"
-import { title } from "@/models/metadata"
+import navigationLinks from "@/models/navigation-links"
+import { title } from "@/models/site-metadata"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 import React from "react"

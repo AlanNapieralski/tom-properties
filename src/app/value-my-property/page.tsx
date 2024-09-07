@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { valuePropertyImage } from '@/models/valuePropertyContent'
+import { valuePropertyImage } from '@/models/valueProperty-content'
 import RootLayout from '../layout'
 import ValuePropertyForm from '@/components/ui/ValuePropertyForm'
 
