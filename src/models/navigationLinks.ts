@@ -32,7 +32,7 @@ const navLinks: NavLinkType[] = [
   },
   {
     name: 'Contact Us',
-    url: '#contact-us',
+    url: '/#contact-us',
     theme: 'dark'
   }
 ]

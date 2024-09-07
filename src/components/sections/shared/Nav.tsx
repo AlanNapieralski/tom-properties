@@ -11,7 +11,7 @@ export type NavProps = {
   drawerRef: RefObject<HTMLInputElement>
 }
 
-export default function Nav() {
+export default function Nav({ className = "" }) {
   const [isSticky, setIsSticky] = useState(false)
   const navbarRef = useRef<HTMLElement | null>(null)
 
@@ -34,7 +34,7 @@ export default function Nav() {
 
 
   return (
-    <header ref={navbarRef} className={`sticky inset-0 flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100'}`} >
+    <header ref={navbarRef} className={`inset-0 flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100'} ` + className} >
 
       <div className="h-full">
         <Image
