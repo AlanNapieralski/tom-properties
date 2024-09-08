@@ -64,9 +64,9 @@ export default function InputForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-bold">Name</FormLabel>
+                <FormLabel className="text-xl font-bold">Full Name</FormLabel>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary" type="text" {...field} />
+                  <Input className="p-4 border-2 border-primary w-1/3" type="text" {...field} />
                 </FormControl>
               </FormItem>
             )}

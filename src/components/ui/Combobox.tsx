@@ -46,13 +46,13 @@ export function Combobox({ className = '', label, searchPlaceholder, itemIdentif
           className={className}
         >
           {value
-            ? items.find((framework) => framework.value === value)?.label
+            ? items.find((item) => item.value === value)?.label
             : label}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full">
-        <Command>
+        <Command >
           <CommandInput placeholder={searchPlaceholder} />
           <CommandList>
             <CommandEmpty>No {itemIdentifier} found.</CommandEmpty>

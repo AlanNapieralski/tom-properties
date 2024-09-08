@@ -33,20 +33,19 @@ export default function SideNav({ triggerButton }: SideNavProps) {
           {navigationLinks.map((item, index) => (
             <React.Fragment key={index}>
               <Separator className="border" />
-              <Link
-                href={item.url}
-                className="text-xl font-bold rounded hover:bg-primary hover:text-secondary p-4 transition-colors duration-300 ease-out"
-              >
-                {item.name}
-              </Link>
+              <SheetClose asChild>
+                <Link
+                  href={item.url}
+                  className="text-xl font-bold rounded hover:bg-primary hover:text-secondary p-4 transition-colors duration-300 ease-out"
+                >
+                  {item.name}
+                </Link>
+              </SheetClose>
             </React.Fragment>
           ))}
         </div>
-        <SheetFooter>
-          <SheetClose>
-          </SheetClose>
-        </SheetFooter>
       </SheetContent>
+
     </Sheet >
   )
 }

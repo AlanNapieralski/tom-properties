@@ -7,11 +7,14 @@ import Image from 'next/image'
 import SideNav from '@/components/ui/SideNav'
 import Button from '@/components/ui/CustomButton'
 
+import { FC } from 'react'
+import { usePathname } from 'next/navigation'
+
 export type NavProps = {
-  drawerRef: RefObject<HTMLInputElement>
+  navPosition?: 'sticky' | 'fixed'
 }
 
-export default function Nav({ className = "" }) {
+const Nav: FC = ({ navPosition = 'sticky' }: NavProps) => {
   const [isSticky, setIsSticky] = useState(false)
   const navbarRef = useRef<HTMLElement | null>(null)
 
@@ -32,9 +35,12 @@ export default function Nav({ className = "" }) {
   }, [])
 
 
+  const pathname = usePathname()
+
+  const isFixedNavbar = pathname === '/value-my-property'
 
   return (
-    <header ref={navbarRef} className={`inset-0 flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100'} ` + className} >
+    <header ref={navbarRef} className={`inset-0 flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100 '} ${isFixedNavbar ? ' fixed' : ' sticky'}`} >
 
       <div className="h-full">
         <Image
@@ -45,22 +51,24 @@ export default function Nav({ className = "" }) {
           className='h-full w-auto'
         />
       </div>
+      <nav>
+        <div className='flex flex-row gap-12'>
+          <div className="flex-grow flex justify-center items-center gap-4 py-2">
+            {navLinks.map((item, index) => {
+              return <Button key={index} type='link' action={item.url} theme={item.theme} className='px-8 h-full min-h-10'>{item.name}</Button>
+            })}
+          </div>
 
-      <div className='flex flex-row gap-12'>
-        <div className="flex-grow flex justify-center items-center gap-4 py-2">
-          {navLinks.map((item, index) => {
-            return <Button key={index} type='link' action={item.url} theme={item.theme} className='px-8 h-full min-h-10'>{item.name}</Button>
-          })}
+          <SideNav triggerButton={
+            <button className='group aspect-square h-full bg-secondary p-2 rounded border-none'>
+              <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
+            </button>
+          } />
+
         </div>
-
-        <SideNav triggerButton={
-          <button className='group aspect-square h-full bg-secondary p-2 rounded border-none'>
-            <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
-          </button>
-        } />
-
-      </div>
-    </header >
+      </nav>
+    </header>
   )
 }
 
+export default Nav
