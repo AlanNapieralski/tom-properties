@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, ChevronDown } from "lucide-react"
+import { FaCaretDown } from "react-icons/fa";
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -48,7 +48,7 @@ export function Combobox({ className = '', label, searchPlaceholder, itemIdentif
           {value
             ? items.find((item) => item.value === value)?.label
             : label}
-          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <FaCaretDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full">

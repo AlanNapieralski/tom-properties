@@ -66,15 +66,14 @@ export default function ValuePropertyForm({ className = '' }) {
       <form action="" className={`flex flex-col justify-center items-center ` + className}>
         <h1 className='flex justify-center items-center text-5xl text-secondary font-bold mb-8'>Let us valuate your property</h1>
 
-        <div className='grid grid-cols-4 gap-y-4 gap-x-12 items-end'>
+        <div className='grid grid-cols-4 gap-y-4 gap-x-12 items-end w-full'>
           <FormField
             control={form.control}
             name="postcode"
             render={({ field }) => (
               <FormItem className='col-span-2'>
-                <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Postcode</FormLabel>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary border-none" placeholder='Enter your postcode here' type="text" {...field} />
+                  <Input className="p-4 border-2 border-primary " placeholder='Enter your postcode here' type="text" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -137,7 +136,7 @@ export default function ValuePropertyForm({ className = '' }) {
             )}
           />
         </div>
-        <Button type='button' buttonType="submit" theme='dark' action={(() => null)} className="my-12 w-2/3">Submit</Button>
+        <Button type='button' buttonType="submit" theme='dark' action={(() => null)} className="my-12 w-1/4">Submit</Button>
       </form>
     </Form >
   )
