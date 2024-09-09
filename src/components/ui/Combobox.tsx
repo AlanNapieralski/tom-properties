@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -26,7 +26,7 @@ export type ComboboxItem = {
 
 type ComboboxProps = {
   label: string
-  searchPlaceholder: string
+  searchPlaceholder?: string
   itemIdentifier: string
   items: ComboboxItem[]
   className?: string
@@ -48,30 +48,25 @@ export function Combobox({ className = '', label, searchPlaceholder, itemIdentif
           {value
             ? items.find((item) => item.value === value)?.label
             : label}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full">
         <Command >
-          <CommandInput placeholder={searchPlaceholder} />
+          {searchPlaceholder ? <CommandInput placeholder={searchPlaceholder} /> : null}
           <CommandList>
-            <CommandEmpty>No {itemIdentifier} found.</CommandEmpty>
+            {searchPlaceholder ? <CommandEmpty>No {itemIdentifier} found.</CommandEmpty> : null}
             <CommandGroup>
               {items.map((item) => (
                 <CommandItem
                   key={item.value}
                   value={item.value}
+                  className="justify-center"
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)
                   }}
                 >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === item.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
                   {item.label}
                 </CommandItem>
               ))}

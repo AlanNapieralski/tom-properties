@@ -9,7 +9,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Combobox } from './Combobox'
-import { valuationTypes, propertyTypes } from '@/models/valueProperty-content'
+import { valuationTypes, propertyTypes, noOfBeds, addresses } from '@/models/valueProperty-content'
+import { useEffect, useState } from 'react'
 
 export default function ValuePropertyForm({ className = '' }) {
 
@@ -44,13 +45,6 @@ export default function ValuePropertyForm({ className = '' }) {
     },
   })
 
-  const searchItems = [
-    {
-      label: 'exampleLabel',
-      value: 'exampleValue'
-    }
-  ]
-
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
       title: "You submitted the following values:",
@@ -62,49 +56,56 @@ export default function ValuePropertyForm({ className = '' }) {
     })
   }
 
+  const [isClicked, setIsClicked] = useState(false)
+
+
 
   return (
     <Form {...form} >
 
-      <form action="" className={`flex-col ` + className}>
-        <h1 className='flex justify-center text-5xl text-secondary font-bold mb-8'>Let us valuate your property</h1>
+      <form action="" className={`flex flex-col justify-center items-center ` + className}>
+        <h1 className='flex justify-center items-center text-5xl text-secondary font-bold mb-8'>Let us valuate your property</h1>
 
-        <div className='grid grid-cols-3 w-[720px] gap-y-8 gap-x-4 items-end'>
+        <div className='grid grid-cols-4 gap-y-4 gap-x-12 items-end'>
           <FormField
             control={form.control}
             name="postcode"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-bold text-secondary mx-2">Postcode</FormLabel>
+              <FormItem className='col-span-2'>
+                <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Postcode</FormLabel>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary border-none" type="text" {...field} />
+                  <Input className="p-4 border-2 border-primary border-none" placeholder='Enter your postcode here' type="text" {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
 
-          <Button type='button' theme='light' action={(() => null)} className="grid grid-cols-subgrid col-span-2">Find address</Button>
+          <Button type='button' theme='dark' action={(e) => {
+            e.preventDefault()
+            setIsClicked(true)
+          }} className="col-span-2">Find address</Button>
 
-          <FormField
+          {isClicked ? <FormField
             control={form.control}
             name="selAddress"
             render={({ field }) => (
-              <FormItem className='grid grid-cols-subgrid col-span-3'>
+              <FormItem className='col-span-4'>
+                <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Address</FormLabel>
                 <FormControl>
-                  <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={searchItems} className='col-span-3' {...field} />
+                  <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={addresses} className='w-full' {...field} />
                 </FormControl>
               </FormItem>
             )}
-          />
+          /> : null}
 
           <FormField
             control={form.control}
             name="bedsNo"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-bold text-secondary mx-2">Number of Bedrooms</FormLabel>
+              <FormItem className='col-span-2'>
+                <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Number of Bedrooms</FormLabel>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary border-none" type="number" min={1} max={10} {...field} />
+                  <Combobox label='Select number of beds' items={noOfBeds} className='w-full' {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -114,9 +115,10 @@ export default function ValuePropertyForm({ className = '' }) {
             control={form.control}
             name="propertyType"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='col-span-2'>
+                <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Type</FormLabel>
                 <FormControl>
-                  <Combobox label='Select the property type' searchPlaceholder='Search for property types' itemIdentifier='property types' items={propertyTypes} className='w-full' {...field} />
+                  <Combobox label='Select the property type' items={propertyTypes} className='w-full' {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -126,18 +128,17 @@ export default function ValuePropertyForm({ className = '' }) {
             control={form.control}
             name="valType"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='col-start-2 col-span-2'>
+                <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Valuation Type</FormLabel>
                 <FormControl>
-                  <Combobox label='Select the valuation type' searchPlaceholder='Search for valuation types' itemIdentifier='valuation types' items={valuationTypes} className='w-full' {...field} />
+                  <Combobox label='Select the valuation type' items={valuationTypes} className='w-full' {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-subgrid col-span-full">
-            <Button type='button' buttonType="submit" theme='light' action={(() => null)} className="col-start-2">Submit</Button>
-          </div>
         </div>
+        <Button type='button' buttonType="submit" theme='dark' action={(() => null)} className="my-12 w-2/3">Submit</Button>
       </form>
-    </Form>
+    </Form >
   )
 }

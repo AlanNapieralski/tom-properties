@@ -16,16 +16,10 @@ export const valuePropertyImage: ImageProps = {
 
 export const title = 'Let us valuate your property'
 
-export const propertyTypes: ComboboxItem[] = [
-  {
-    label: 'exampleLabel',
-    value: 'exampleValue'
-  },
-]
+export const addresses = ['123 Baker Street,  London,  NW1 6XE,  United Kingdom'].map(val => ({ label: val, value: val }))
 
-export const valuationTypes: ComboboxItem[] = [
-  {
-    label: 'exampleLabel',
-    value: 'exampleValue'
-  },
-]
+export const propertyTypes: ComboboxItem[] = ['example'].map(val => ({ label: val, value: val }))
+
+export const valuationTypes: ComboboxItem[] = ['example'].map(val => ({ label: val, value: val }))
+
+export const noOfBeds: ComboboxItem[] = ['studio', '1', '2', '3', '4', '5', '6', '6+'].map(val => ({ label: val, value: val }))

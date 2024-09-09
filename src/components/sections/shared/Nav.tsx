@@ -19,10 +19,8 @@ const Nav: FC = () => {
 
       if (window.scrollY >= 96) {
         setIsSticky(true)
-        console.log('under: ', window.scrollY)
       } else if (window.scrollY < 96) {
         setIsSticky(false)
-        console.log('over: ', window.scrollY)
       }
     }
 
