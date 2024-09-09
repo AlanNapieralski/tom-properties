@@ -19,13 +19,14 @@ export default function RootLayout({ children }:
   {
     children: React.ReactNode
   }) {
+
   return (
     <html lang="en" className='scroll-smooth'>
-      <body className={lato.className}>
+      <body className={lato.className + " pt-24"}>
         <Nav />
         <main>{children}</main>
         <Footer />
       </body>
-    </html>
+    </html >
   )
 }

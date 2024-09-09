@@ -7,7 +7,7 @@ export default function ValueMyProperty() {
   const { src, alt, width, height } = valuePropertyImage
 
   return (
-    <section className='relative h-screen'>
+    <section className='relative h-[calc(100vh-6rem)]'>
       <Image
         src={src}
         alt={alt}

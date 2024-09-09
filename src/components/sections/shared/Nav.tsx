@@ -8,7 +8,6 @@ import SideNav from '@/components/ui/SideNav'
 import Button from '@/components/ui/CustomButton'
 
 import { FC } from 'react'
-import { usePathname } from 'next/navigation'
 
 const Nav: FC = () => {
   const [isSticky, setIsSticky] = useState(false)
@@ -18,10 +17,10 @@ const Nav: FC = () => {
     const handleScroll = () => {
       if (!navbarRef.current) return
 
-      if (window.scrollY > 80) {
+      if (window.scrollY >= 96) {
         setIsSticky(true)
         console.log('under: ', window.scrollY)
-      } else if (window.scrollY <= 80) {
+      } else if (window.scrollY < 96) {
         setIsSticky(false)
         console.log('over: ', window.scrollY)
       }
@@ -32,36 +31,32 @@ const Nav: FC = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const pathname = usePathname()
 
-  const isFixedNavbar = ['/', '/value-my-property'].find(route => pathname === route)
   return (
-    <>
-      <header ref={navbarRef} className={`flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-[height,opacity] duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95 ' : 'h-24 opacity-100 '} ${isFixedNavbar ? ' fixed w-screen pr-8' : (isSticky ? ' mb-8 sticky inset-0' : ' sticky inset-0')}`}>
-        <div className="h-full">
-          <Image
-            src='/assets/logo.png'
-            alt='logo'
-            width={360}
-            height={360}
-            className='h-full w-auto'
-          />
+    <header ref={navbarRef} className={`fixed inset-0  w-screen flex items-center justify-between p-4 pr-12 bg-secondary shadow-bottom z-50 transition-[height,opacity] duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100 '} `}>
+      <div className="h-full">
+        <Image
+          src='/assets/logo.png'
+          alt='logo'
+          width={360}
+          height={360}
+          className={`h-full w-auto`}
+        />
+      </div>
+      <nav className='flex flex-row gap-12 items-center h-full'>
+        <div className="flex-grow flex justify-center items-center gap-x-4 h-full">
+          {navLinks.map((item, index) => {
+            return <Button key={index} type='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+          })}
         </div>
-        <nav className='flex flex-row gap-12 items-center h-full'>
-          <div className="flex-grow flex justify-center items-center gap-x-4 h-full">
-            {navLinks.map((item, index) => {
-              return <Button key={index} type='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
-            })}
-          </div>
 
-          <SideNav triggerButton={
-            <button className='group aspect-square h-full bg-secondary rounded border-none'>
-              <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
-            </button>
-          } />
-        </nav>
-      </header >
-    </>
+        <SideNav triggerButton={
+          <button className='group aspect-square h-full bg-secondary rounded border-none'>
+            <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
+          </button>
+        } />
+      </nav>
+    </header >
   )
 }
 

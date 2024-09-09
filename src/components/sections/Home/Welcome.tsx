@@ -16,7 +16,7 @@ export default function Welcome() {
   }, [])
 
   return (
-    <section className="flex flex-col mb-16 h-screen">
+    <section className="flex flex-col mb-16 h-[calc(100vh-6rem)]">
       <div className='relative overflow-hidden h-full'>
         <div className='absolute inset-0 h-full'>
           {images.map((img, idx) => (
@@ -28,7 +28,7 @@ export default function Welcome() {
           ))}
         </div>
         <div className='absolute inset-0 bg-gradient-to-b from-primary via-primary to-transparent opacity-30'></div>
-        <h1 className="absolute inset-0 flex items-center justify-center font-bold text-5xl text-white drop-shadow-lg">
+        <h1 className="absolute inset-x-0 top-56 flex items-center justify-center font-bold text-5xl text-white drop-shadow-lg">
           {welcome.title}
         </h1>
       </div>
