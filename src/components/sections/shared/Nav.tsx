@@ -34,33 +34,34 @@ const Nav: FC = () => {
 
   const pathname = usePathname()
 
-  const isFixedNavbar = pathname === '/value-my-property'
-
+  const isFixedNavbar = ['/', '/value-my-property'].find(route => pathname === route)
   return (
-    <header ref={navbarRef} className={`flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-[height,opacity] duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95 mb-8' : 'h-24 opacity-100 '} ${isFixedNavbar ? ' fixed w-screen pr-8 ' : ' sticky inset-0 '}`} >
-      <div className="h-full">
-        <Image
-          src='/assets/logo.png'
-          alt='logo'
-          width={360}
-          height={360}
-          className='h-full w-auto'
-        />
-      </div>
-      <nav className='flex flex-row gap-12 items-center h-full'>
-        <div className="flex-grow flex justify-center items-center gap-x-4 h-full">
-          {navLinks.map((item, index) => {
-            return <Button key={index} type='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
-          })}
+    <>
+      <header ref={navbarRef} className={`flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-[height,opacity] duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95 ' : 'h-24 opacity-100 '} ${isFixedNavbar ? ' fixed w-screen pr-8' : (isSticky ? ' mb-8 sticky inset-0' : ' sticky inset-0')}`}>
+        <div className="h-full">
+          <Image
+            src='/assets/logo.png'
+            alt='logo'
+            width={360}
+            height={360}
+            className='h-full w-auto'
+          />
         </div>
+        <nav className='flex flex-row gap-12 items-center h-full'>
+          <div className="flex-grow flex justify-center items-center gap-x-4 h-full">
+            {navLinks.map((item, index) => {
+              return <Button key={index} type='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+            })}
+          </div>
 
-        <SideNav triggerButton={
-          <button className='group aspect-square h-full bg-secondary rounded border-none'>
-            <FontAwesomeIcon icon={faBars} width={48} className='h-full text-primary' />
-          </button>
-        } />
-      </nav>
-    </header>
+          <SideNav triggerButton={
+            <button className='group aspect-square h-full bg-secondary rounded border-none'>
+              <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
+            </button>
+          } />
+        </nav>
+      </header >
+    </>
   )
 }
 
