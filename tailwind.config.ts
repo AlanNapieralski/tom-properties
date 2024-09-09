@@ -17,10 +17,10 @@ const config: Config = {
 				'3000': '3000ms',
 			},
 			scale: {
-				'200': '2',     // Scales to 200% (2x)
-				'300': '3',     // Scales to 300% (3x)
-				'400': '4',     // Scales to 400% (4x)
-				'500': '5',     // Scales to 500% (5x)
+				'200': '2',
+				'300': '3',
+				'400': '4',
+				'500': '5',
 			},
 			colors: {
 				primary: {
