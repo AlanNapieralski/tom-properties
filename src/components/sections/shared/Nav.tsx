@@ -31,7 +31,7 @@ const Nav: FC = () => {
 
 
   return (
-    <header ref={navbarRef} className={`fixed inset-0  w-screen flex items-center justify-between p-4 pr-12 bg-secondary shadow-bottom z-50 transition-[height,opacity] duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100 '} `}>
+    <header ref={navbarRef} className={`fixed inset-0 w-screen flex items-center justify-between pr-12 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 p-2 opacity-95' : 'h-24 p-4 opacity-100 '} `}>
       <div className="h-full">
         <Image
           src='/assets/logo.png'
