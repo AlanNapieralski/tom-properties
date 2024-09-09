@@ -66,7 +66,7 @@ export default function ValuePropertyForm({ className = '' }) {
   return (
     <Form {...form} >
 
-      <form action="" className={`flex flex-col ` + className}>
+      <form action="" className={`flex-col ` + className}>
         <h1 className='flex justify-center text-5xl text-secondary font-bold mb-8'>Let us valuate your property</h1>
 
         <div className='grid grid-cols-3 w-[720px] gap-y-8 gap-x-4 items-end'>

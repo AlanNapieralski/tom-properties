@@ -9,6 +9,7 @@ import Button from '@/components/ui/CustomButton'
 
 import { FC } from 'react'
 import { usePathname } from 'next/navigation'
+import { debounce } from '@/lib/debounce'
 
 export type NavProps = {
   navPosition?: 'sticky' | 'fixed'
@@ -34,13 +35,12 @@ const Nav: FC = ({ navPosition = 'sticky' }: NavProps) => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-
   const pathname = usePathname()
 
   const isFixedNavbar = pathname === '/value-my-property'
 
   return (
-    <header ref={navbarRef} className={`inset-0 flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100 '} ${isFixedNavbar ? ' fixed' : ' sticky'}`} >
+    <header ref={navbarRef} className={`flex items-center justify-between p-4 bg-secondary shadow-bottom z-50 transition-[height,opacity] duration-200 ease-in-out ${isSticky ? 'h-16 opacity-95' : 'h-24 opacity-100 '} ${isFixedNavbar ? ' fixed w-screen  pr-8' : ' sticky inset-0 '}`} >
 
       <div className="h-full">
         <Image
@@ -52,7 +52,7 @@ const Nav: FC = ({ navPosition = 'sticky' }: NavProps) => {
         />
       </div>
       <nav>
-        <div className='flex flex-row gap-12'>
+        <div className='flex flex-row gap-12 items-center'>
           <div className="flex-grow flex justify-center items-center gap-4 py-2">
             {navLinks.map((item, index) => {
               return <Button key={index} type='link' action={item.url} theme={item.theme} className='px-8 h-full min-h-10'>{item.name}</Button>
@@ -60,7 +60,7 @@ const Nav: FC = ({ navPosition = 'sticky' }: NavProps) => {
           </div>
 
           <SideNav triggerButton={
-            <button className='group aspect-square h-full bg-secondary p-2 rounded border-none'>
+            <button className='group aspect-square h-full bg-secondary rounded border-none'>
               <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
             </button>
           } />
