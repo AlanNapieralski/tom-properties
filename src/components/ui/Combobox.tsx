@@ -27,7 +27,7 @@ export type ComboboxItem = {
 type ComboboxProps = {
   label: string
   searchPlaceholder?: string
-  itemIdentifier: string
+  itemIdentifier?: string
   items: ComboboxItem[]
   className?: string
 }
