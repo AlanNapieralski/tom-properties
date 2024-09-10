@@ -1,20 +1,9 @@
-import Button from '@/components/ui/CustomButton'
-
-export default function ArticleSnippetWithButton({ title, text, action, buttonTitle }: { title: string, text: string, action: string | (() => void), buttonTitle: string }) {
-
-  const type = typeof action === 'function' ? 'button' : 'link'
+export default function ArticleSnippetWithButton({ title, text, transitionClasses }: { title: string, text: string, transitionClasses: string }) {
 
   return (
-    <section className="mb-16">
-      <article className="flex flex-col gap-2 w-[700px]">
-        <h2 className="text-4xl underline font-bold">{title}</h2>
-        <p className="text-lg">{text}</p>
-        <Button
-          type={type}
-          action={action}
-          className="btn flex justify-self-end my-2 w-36 ml-auto"
-        >{buttonTitle}</Button>
-      </article>
-    </section>
+    <article className={`flex flex-col gap-2 w-[700px] ${transitionClasses}`}>
+      <h1 className="text-5xl font-bold text-secondary mb-4">{title}</h1>
+      <p className="text-lg text-secondary">{text}</p>
+    </article>
   )
 }

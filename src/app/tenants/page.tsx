@@ -1,15 +1,13 @@
 import TopPanel from "@/components/sections/shared/TopPanel"
 import SidePageContactUs from "@/components/sections/shared/SidePageContactUs"
-import { main, tenantInfo } from "@/models/tenant-content"
-import ArticleSnippetWithButton from "@/components/ui/ArticleSnippetWithButton"
+import { tenantInfo } from "@/models/tenant-content"
 
-export default function Landlords() {
+export default function Tenants() {
 
   return (
     <>
-      <TopPanel title={main.title} />
-      <div className="wrapper">
-        <ArticleSnippetWithButton title={tenantInfo.title} text={tenantInfo.text} buttonTitle="Interested?" action="#side-contact-us" />
+      <TopPanel data={tenantInfo} />
+      <div className="wrapper flex justify-center items-center">
         <SidePageContactUs />
       </div>
     </>

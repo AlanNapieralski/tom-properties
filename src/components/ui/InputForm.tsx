@@ -33,7 +33,7 @@ const FormSchema = z.object({
   }),
 })
 
-export default function InputForm() {
+export default function InputForm({ className = '' }: { className?: string }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -57,8 +57,8 @@ export default function InputForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-between h-full">
-        <div className="flex flex-col space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `}>
+        <div className={`flex flex-col space-y-4 w-full ` + className}>
           <FormField
             control={form.control}
             name="name"
