@@ -3,6 +3,7 @@
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
+import { LuXCircle } from "react-icons/lu"
 import {
   Controller,
   ControllerProps,
@@ -93,12 +94,14 @@ const FormLabel = React.forwardRef<
   const { error, formItemId } = useFormField()
 
   return (
-    <Label
-      ref={ref}
-      className={cn(error && "text-destructive", className)}
-      htmlFor={formItemId}
-      {...props}
-    />
+    <>
+      <Label
+        ref={ref}
+        className={cn(error, className)}
+        htmlFor={formItemId}
+        {...props}
+      />
+    </>
   )
 })
 FormLabel.displayName = "FormLabel"
@@ -154,14 +157,17 @@ const FormMessage = React.forwardRef<
   }
 
   return (
-    <p
-      ref={ref}
-      id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
-      {...props}
-    >
-      {body}
-    </p>
+    <div className="flex items-center gap-2">
+      {error ? <LuXCircle className="text-destructive" /> : null}
+      <p
+        ref={ref}
+        id={formMessageId}
+        className={cn("text-sm font-medium text-destructive pb-[0.25rem]", className)}
+        {...props}
+      >
+        {body}
+      </p>
+    </div>
   )
 })
 FormMessage.displayName = "FormMessage"

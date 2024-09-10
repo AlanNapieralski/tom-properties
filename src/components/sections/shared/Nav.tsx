@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import navLinks from '@/models/navigation-links'
@@ -11,11 +11,9 @@ import { FC } from 'react'
 
 const Nav: FC = () => {
   const [isSticky, setIsSticky] = useState(false)
-  const navbarRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!navbarRef.current) return
 
       if (window.scrollY >= 96) {
         setIsSticky(true)
@@ -31,7 +29,7 @@ const Nav: FC = () => {
 
 
   return (
-    <header ref={navbarRef} className={`fixed inset-0 w-screen flex items-center justify-between pr-12 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 p-2 opacity-95' : 'h-24 p-4 opacity-100 '} `}>
+    <header className={`fixed inset-0 w-screen flex items-center justify-between pr-12 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 p-2 opacity-95' : 'h-24 p-4 opacity-100 '} `}>
       <div className="h-full">
         <Image
           src='/assets/logo.png'

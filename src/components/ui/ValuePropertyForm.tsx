@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormLabel, FormField, FormItem } from '@/components/ui/form'
 
@@ -10,7 +10,7 @@ import { z } from "zod"
 
 import { Combobox } from './Combobox'
 import { valuationTypes, propertyTypes, noOfBeds, addresses } from '@/models/valueProperty-content'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function ValuePropertyForm({ className = '' }) {
 
@@ -57,8 +57,6 @@ export default function ValuePropertyForm({ className = '' }) {
   }
 
   const [isClicked, setIsClicked] = useState(false)
-
-
 
   return (
     <Form {...form} >

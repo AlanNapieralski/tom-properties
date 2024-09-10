@@ -17,27 +17,34 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import PhoneInput from "react-phone-number-input"
 
 const FormSchema = z.object({
-  name: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  tel: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  message: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  name: z.string()
+    .min(2, {
+      message: "Name must be at least 2 characters",
+    })
+    .max(100, {
+      message: "Name is too long"
+    }),
+  email: z.string()
+    .email({ message: "Must be email format: example@email.com" }),
+  tel: z.string()
+    .min(7, { message: "Phone number must be at least 7 digits." })
+    .max(15, { message: "Phone number must be no more than 15 digits." })
+    .regex(/^\d+$/, { message: "Phone number must contain only digits." }),
+  message: z.string()
+    .min(1, { message: "Message is required and cannot be empty." })
+    .max(999, {
+      message: "Message must not be longer than a few hundred words.",
+    }),
 })
 
-export default function InputForm({ className = '' }: { className?: string }) {
+export default function InputForm({ className = '', submitStyle = '' }: { className?: string, submitStyle?: string }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "",
+      name: "dupa",
       email: "",
       tel: "",
       message: "",
@@ -57,7 +64,7 @@ export default function InputForm({ className = '' }: { className?: string }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `} noValidate>
         <div className={`flex flex-col space-y-4 w-full ` + className}>
           <FormField
             control={form.control}
@@ -68,6 +75,7 @@ export default function InputForm({ className = '' }: { className?: string }) {
                 <FormControl>
                   <Input className="p-4 border-2 border-primary w-1/3" type="text" {...field} />
                 </FormControl>
+                <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
@@ -82,6 +90,7 @@ export default function InputForm({ className = '' }: { className?: string }) {
                   <FormControl>
                     <Input className="p-4 border-2 border-primary" type="email" {...field} />
                   </FormControl>
+                  <FormMessage className="font-bold pt-1" />
                 </FormItem>
               )}
             />
@@ -95,6 +104,7 @@ export default function InputForm({ className = '' }: { className?: string }) {
                   <FormControl>
                     <Input className="p-4 border-2 border-primary" type="tel" {...field} />
                   </FormControl>
+                  <FormMessage className="font-bold pt-1" />
                 </FormItem>
               )}
             />
@@ -114,12 +124,13 @@ export default function InputForm({ className = '' }: { className?: string }) {
                     {...field}
                   />
                 </FormControl>
+                <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
         </div>
 
-        <Button type='button' buttonType="submit" action={(() => null)} className="w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary">Submit</Button>
+        <Button type='button' buttonType="submit" action={(() => null)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
       </form>
     </Form >
   )

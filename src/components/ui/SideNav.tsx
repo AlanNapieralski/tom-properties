@@ -1,14 +1,12 @@
-'use client'
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+
 import navigationLinks from "@/models/navigation-links"
 import { title } from "@/models/site-metadata"
 import Link from "next/link"
