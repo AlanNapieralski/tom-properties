@@ -1,8 +1,9 @@
 "use client"
 import { Input } from '@/components/ui/input'
-import { Form, FormControl, FormLabel, FormField, FormItem } from '@/components/ui/form'
+import { Form, FormControl, FormLabel, FormMessage, FormField, FormItem } from '@/components/ui/form'
 
-import Button from '@/components/ui/CustomButton'
+import Button from './CustomButton'
+import type { CustomButtonProps } from './CustomButton'
 import { toast } from "@/hooks/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -10,40 +11,33 @@ import { z } from "zod"
 
 import { Combobox } from './Combobox'
 import { valuationTypes, propertyTypes, noOfBeds, addresses } from '@/models/valueProperty-content'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ValuePropertyForm({ className = '' }) {
 
-
   const FormSchema = z.object({
-    postcode: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+    postcode: z.string()
+      .min(6, { message: "Enter your postcode and select from the dropdown below" })
+      .max(8, { message: "Enter your postcode and select from the dropdown below" }),
+    selAddress: z.string({
+      required_error: "Please select the address.",
     }),
-    selAddress: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+    bedsNo: z.string({
+      required_error: "Please select the number of beds.",
     }),
-    bedsNo: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+    propertyType: z.string({
+      required_error: "Please select the property type.",
     }),
-    propertyType: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
-    }),
-    valType: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+    valType: z.string({
+      required_error: "Please select the valuation type.",
     }),
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      postcode: '',
-      selAddress: '',
-      bedsNo: '',
-      propertyType: '',
-      valType: '',
-
-    },
   })
+
+  const { register, handleSubmit, watch, formState: { errors }, trigger } = form;
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
@@ -58,28 +52,35 @@ export default function ValuePropertyForm({ className = '' }) {
 
   const [isClicked, setIsClicked] = useState(false)
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true)
+  }, [])
+
+
   return (
     <Form {...form} >
 
-      <form action="" className={`flex flex-col justify-center items-center ` + className}>
+      <form onSubmit={handleSubmit(onSubmit)} className={`flex flex-col justify-center items-center ` + className} noValidate>
         <h1 className='flex justify-center items-center text-5xl text-secondary font-bold mb-8'>Let us valuate your property</h1>
 
-        <div className='grid grid-cols-4 gap-y-4 gap-x-12 items-end w-full'>
+        <div className='grid grid-cols-4 gap-y-4 gap-x-12 items-start w-full'>
           <FormField
             control={form.control}
             name="postcode"
             render={({ field }) => (
               <FormItem className='col-span-2'>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary " placeholder='Enter your postcode here' type="text" {...field} />
+                  <Input className="p-4 border-2 border-primary " placeholder='Enter your postcode here' type="text" />
                 </FormControl>
+                <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
-
-          <Button type='button' theme='dark' action={(e) => {
+          <Button disabled={!isLoading} componentType='button' theme='dark' action={(e) => {
             e.preventDefault()
-            setIsClicked(true)
+            trigger('postcode').then(val => val ? setIsClicked(true) : null)
           }} className="col-span-2">Find address</Button>
 
           {isClicked ? <FormField
@@ -91,6 +92,7 @@ export default function ValuePropertyForm({ className = '' }) {
                 <FormControl>
                   <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={addresses} className='w-full' {...field} />
                 </FormControl>
+                <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           /> : null}
@@ -104,6 +106,7 @@ export default function ValuePropertyForm({ className = '' }) {
                 <FormControl>
                   <Combobox label='Select number of beds' items={noOfBeds} className='w-full' {...field} />
                 </FormControl>
+                <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
@@ -117,6 +120,7 @@ export default function ValuePropertyForm({ className = '' }) {
                 <FormControl>
                   <Combobox label='Select the property type' items={propertyTypes} className='w-full' {...field} />
                 </FormControl>
+                <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
@@ -130,11 +134,12 @@ export default function ValuePropertyForm({ className = '' }) {
                 <FormControl>
                   <Combobox label='Select the valuation type' items={valuationTypes} className='w-full' {...field} />
                 </FormControl>
+                <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
         </div>
-        <Button type='button' buttonType="submit" theme='dark' action={(() => null)} className="my-12 w-1/4">Submit</Button>
+        <Button disabled={!isLoading} componentType='button' type="submit" theme='dark' action={(() => null)} className="my-12 w-1/4">Submit</Button>
       </form>
     </Form >
   )

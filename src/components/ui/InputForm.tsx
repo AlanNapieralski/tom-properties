@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useState, useEffect } from "react"
 
 import { toast } from "@/hooks/use-toast"
 import Button from "@/components/ui/CustomButton"
@@ -17,24 +18,22 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import PhoneInput from "react-phone-number-input"
+import { cn } from "@/lib/utils"
 
 const FormSchema = z.object({
   name: z.string()
-    .min(2, {
-      message: "Name must be at least 2 characters",
-    })
+    .min(2, { message: "Name is required" })
     .max(100, {
       message: "Name is too long"
     }),
   email: z.string()
+    .min(1, { message: "Email is required" })
     .email({ message: "Must be email format: example@email.com" }),
   tel: z.string()
-    .min(7, { message: "Phone number must be at least 7 digits." })
-    .max(15, { message: "Phone number must be no more than 15 digits." })
-    .regex(/^\d+$/, { message: "Phone number must contain only digits." }),
+    .regex(/^\d*$/, { message: "Phone number must contain only digits." })
+    .optional(),
   message: z.string()
-    .min(1, { message: "Message is required and cannot be empty." })
+    .min(10, { message: "Message is required" })
     .max(999, {
       message: "Message must not be longer than a few hundred words.",
     }),
@@ -44,7 +43,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "dupa",
+      name: "",
       email: "",
       tel: "",
       message: "",
@@ -62,10 +61,16 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
     })
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true)
+  }, [])
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `} noValidate>
-        <div className={`flex flex-col space-y-4 w-full ` + className}>
+        <div className={cn(`flex flex-col space-y-4 w-full ` + className)}>
           <FormField
             control={form.control}
             name="name"
@@ -130,7 +135,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
           />
         </div>
 
-        <Button type='button' buttonType="submit" action={(() => null)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
+        <Button disabled={!isLoading} componentType='button' type="submit" action={(() => null)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
       </form>
     </Form >
   )
