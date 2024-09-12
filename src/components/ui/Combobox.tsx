@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { FaCaretDown } from "react-icons/fa";
-
+import { FaCaretDown } from "react-icons/fa"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,23 +17,32 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { ControllerRenderProps, FieldValues } from "react-hook-form"
+import { Path } from "react-hook-form"
 
 export type ComboboxItem = {
   value: string
   label: string
 }
 
-type ComboboxProps = {
+type ComboboxProps<TFieldValues extends FieldValues = FieldValues> = {
   label: string
   searchPlaceholder?: string
   itemIdentifier?: string
   items: ComboboxItem[]
   className?: string
+  field: ControllerRenderProps<TFieldValues, Path<TFieldValues>>
 }
 
-export function Combobox({ className = '', label, searchPlaceholder, itemIdentifier, items }: ComboboxProps) {
+export function Combobox<TFieldValues extends FieldValues>({
+  className = '',
+  label,
+  searchPlaceholder,
+  itemIdentifier,
+  items,
+  field,
+}: ComboboxProps<TFieldValues>) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -43,27 +51,26 @@ export function Combobox({ className = '', label, searchPlaceholder, itemIdentif
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={className}
+          className={cn("w-[200px] justify-center", className)}
         >
-          {value
-            ? items.find((item) => item.value === value)?.label
+          {field.value
+            ? items.find((item) => item.value === field.value)?.label
             : label}
           <FaCaretDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full">
-        <Command >
-          {searchPlaceholder ? <CommandInput placeholder={searchPlaceholder} /> : null}
+        <Command>
+          {searchPlaceholder && <CommandInput placeholder={searchPlaceholder} />}
           <CommandList>
-            {searchPlaceholder ? <CommandEmpty>No {itemIdentifier} found.</CommandEmpty> : null}
+            {searchPlaceholder && <CommandEmpty>No {itemIdentifier} found.</CommandEmpty>}
             <CommandGroup>
               {items.map((item) => (
                 <CommandItem
                   key={item.value}
                   value={item.value}
-                  className=""
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                  onSelect={() => {
+                    field.onChange(item.value)
                     setOpen(false)
                   }}
                 >
@@ -77,3 +84,4 @@ export function Combobox({ className = '', label, searchPlaceholder, itemIdentif
     </Popover>
   )
 }
+

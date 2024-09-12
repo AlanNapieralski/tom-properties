@@ -3,14 +3,14 @@ import Link from "next/link"
 
 export type CustomButtonProps = {
   buttonType?: 'link' | 'button'
-  action: string | ((e: React.MouseEvent<HTMLButtonElement>) => void)
+  action?: string | ((e: React.MouseEvent<HTMLButtonElement>) => void)
   children: React.ReactNode
   theme?: 'dark' | 'light'
   className?: string
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 
-const CustomButton = ({ buttonType = 'button', action, children, theme = 'dark', className = "", ...props }: CustomButtonProps) => {
+const CustomButton = ({ buttonType = 'button', action = (() => null), children, theme = 'dark', className = "", ...props }: CustomButtonProps) => {
   return (
     <>
       {buttonType === "button" && typeof action === "function" ? (

@@ -3,7 +3,6 @@ import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormLabel, FormMessage, FormField, FormItem } from '@/components/ui/form'
 
 import Button from '@/components/ui/CustomButton'
-import { toast } from "@/hooks/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -30,7 +29,7 @@ export default function ValuePropertyForm({ className = '' }) {
     valType: z.string({
       required_error: "Please select the valuation type.",
     }),
-  })
+  }).required()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -39,14 +38,7 @@ export default function ValuePropertyForm({ className = '' }) {
   const { register, handleSubmit, watch, formState: { errors }, trigger } = form;
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    console.log('submitted')
   }
 
   const [isClicked, setIsClicked] = useState(false)
@@ -71,7 +63,7 @@ export default function ValuePropertyForm({ className = '' }) {
             render={({ field }) => (
               <FormItem className='col-span-2'>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary " placeholder='Enter your postcode here' type="text"  {...field} />
+                  <Input className="p-4 border-2 border-primary " placeholder='Enter your postcode here' type="text" {...field} />
                 </FormControl>
                 <FormMessage className="font-bold pt-1" />
               </FormItem>
@@ -89,7 +81,7 @@ export default function ValuePropertyForm({ className = '' }) {
               <FormItem className='col-span-4'>
                 <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Address</FormLabel>
                 <FormControl>
-                  <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={addresses} className='w-full' {...field} />
+                  <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={addresses} className='w-full' field={field} />
                 </FormControl>
                 <FormMessage className="font-bold pt-1" />
               </FormItem>
@@ -103,7 +95,7 @@ export default function ValuePropertyForm({ className = '' }) {
               <FormItem className='col-span-2'>
                 <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Number of Bedrooms</FormLabel>
                 <FormControl>
-                  <Combobox label='Select number of beds' items={noOfBeds} className='w-full' {...field} />
+                  <Combobox label='Select number of beds' items={noOfBeds} className='w-full' field={field} />
                 </FormControl>
                 <FormMessage className="font-bold pt-1" />
               </FormItem>
@@ -117,7 +109,7 @@ export default function ValuePropertyForm({ className = '' }) {
               <FormItem className='col-span-2'>
                 <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Type</FormLabel>
                 <FormControl>
-                  <Combobox label='Select the property type' items={propertyTypes} className='w-full' {...field} />
+                  <Combobox label='Select the property type' items={propertyTypes} className='w-full' field={field} />
                 </FormControl>
                 <FormMessage className="font-bold pt-1" />
               </FormItem>
@@ -131,7 +123,7 @@ export default function ValuePropertyForm({ className = '' }) {
               <FormItem className='col-start-2 col-span-2'>
                 <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Valuation Type</FormLabel>
                 <FormControl>
-                  <Combobox label='Select the valuation type' items={valuationTypes} className='w-full' {...field} />
+                  <Combobox label='Select the valuation type' items={valuationTypes} className='w-full' field={field} />
                 </FormControl>
                 <FormMessage className="font-bold pt-1" />
               </FormItem>

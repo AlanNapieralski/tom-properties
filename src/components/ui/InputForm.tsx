@@ -5,8 +5,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useState, useEffect } from "react"
 
-import { toast } from "@/hooks/use-toast"
-import { CustomButtonProps } from "@/components/ui/CustomButton"
 import Button from "@/components/ui/CustomButton"
 import {
   Form,
@@ -52,14 +50,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    console.log('submitted')
   }
 
   const [isLoading, setIsLoading] = useState(false);
@@ -136,7 +127,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
           />
         </div>
 
-        <Button disabled={!isLoading} type="submit" action={(() => null)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
+        <Button disabled={!isLoading} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
       </form>
     </Form >
   )
