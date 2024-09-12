@@ -6,6 +6,7 @@ import navLinks from '@/models/navigation-links'
 import Image from 'next/image'
 import SideNav from '@/components/ui/SideNav'
 import Button from '@/components/ui/CustomButton'
+import { Separator } from '@/components/ui/separator'
 
 import { FC } from 'react'
 
@@ -42,7 +43,7 @@ const Nav: FC = () => {
       <nav className='flex flex-row gap-12 items-center h-full'>
         <div className="flex-grow flex justify-center items-center gap-x-4 h-full">
           {navLinks.map((item, index) => {
-            return <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+            return item.name === 'divi' ? <Separator orientation='vertical' className='border-[1px] rounded-md border-primary'></Separator> : <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
           })}
         </div>
 

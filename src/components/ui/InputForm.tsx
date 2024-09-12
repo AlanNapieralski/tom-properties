@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { toast } from "@/hooks/use-toast"
 import { Loader2 } from "lucide-react"
+import { NextResponse } from "next/server"
 
 const FormSchema = z.object({
   name: z.string()
@@ -43,7 +44,11 @@ const FormSchema = z.object({
 
 export default function InputForm({ className = '', submitStyle = '' }: { className?: string, submitStyle?: string }) {
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -57,22 +62,51 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
 
   const { reset } = form
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true)
-    reset()
-    toast({
-      title: 'Thank you!',
-      description: "We've received your inquiry"
-    })
 
-    // finally
-    setIsLoading(false)
+    try {
+      const response: Response = await fetch('/api/sendForm', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        toast({
+          title: 'There has been issues submitting the form.',
+          description: "Please try again later",
+          variant: 'destructive',
+        })
+        reset()
+        return
+      }
+
+      reset()
+      toast({
+        title: 'Thank you!',
+        description: "We've received your inquiry"
+      })
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+
+      reset()
+      toast({
+        title: 'The form is not been submitted due to unknown issues.',
+        description: "Please try again later",
+        variant: 'destructive',
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
-
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `} noValidate>
+      <form action='/api/sendForm' method="POST" onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `} noValidate>
         <div className={cn(`flex flex-col space-y-4 w-full ` + className)}>
           <FormField
             control={form.control}

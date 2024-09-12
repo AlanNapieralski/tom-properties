@@ -4,7 +4,7 @@ import Button from '@/components/ui/CustomButton'
 export default function Dashboard() {
 
   return (
-    <section className="grid grid-cols-2 grid-rows-2 gap-4 px-6 mb-16">
+    <section className="grid grid-cols-2 grid-rows-2 gap-4 px-6">
 
       <div className="relative h-96 group">
         <Image

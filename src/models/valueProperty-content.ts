@@ -14,12 +14,17 @@ export const valuePropertyImage: ImageProps = {
   height: 1350
 }
 
-export const title = 'Let us valuate your property'
-
+export const title = 'Request an Valuation'
 export const addresses = ['123 Baker Street,  London,  NW1 6XE,  United Kingdom'].map(val => ({ label: val, value: val }))
 
-export const propertyTypes: ComboboxItem[] = ['example'].map(val => ({ label: val, value: val }))
+const propertyTypesOptions = [
+  'example'
+]
+const valuationTypesOptions = [
+  'example'
+]
+const noOfBedsOptions = ['studio', '1', '2', '3', '4', '5', '6+']
 
-export const valuationTypes: ComboboxItem[] = ['example'].map(val => ({ label: val, value: val }))
-
-export const noOfBeds: ComboboxItem[] = ['studio', '1', '2', '3', '4', '5', '6+'].map(val => ({ label: val, value: val }))
+export const propertyTypes: ComboboxItem[] = propertyTypesOptions.map(val => ({ label: val, value: val }))
+export const valuationTypes: ComboboxItem[] = valuationTypesOptions.map(val => ({ label: val, value: val }))
+export const noOfBeds: ComboboxItem[] = noOfBedsOptions.map(val => ({ label: val, value: val }))

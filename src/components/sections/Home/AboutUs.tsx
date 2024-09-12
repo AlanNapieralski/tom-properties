@@ -4,7 +4,7 @@ import Button from '@/components/ui/CustomButton'
 
 export default function AboutUs() {
   return (
-    <section id='about-us' className="flex mb-16 gap-8">
+    <section id='about-us' className="flex mb-16 gap-8 mt-16">
       <div className="flex-1 h-96">
         <Image
           src='/assets/images/aboutus.jpg'

@@ -1,7 +1,7 @@
 export type NavLinkType = {
   name: string
-  url: string
-  theme: 'dark' | 'light'
+  url?: string
+  theme?: 'dark' | 'light'
 }
 
 const navLinks: NavLinkType[] = [
@@ -9,6 +9,22 @@ const navLinks: NavLinkType[] = [
     name: 'Home',
     url: '/',
     theme: 'dark'
+  },
+  {
+    name: 'divi',
+  },
+  {
+    name: 'Home Renovation',
+    url: '/renovation',
+    theme: 'light'
+  },
+  {
+    name: 'Bathrooms',
+    url: '/bathrooms',
+    theme: 'light'
+  },
+  {
+    name: 'divi',
   },
   {
     name: 'For Landlords',
@@ -24,6 +40,9 @@ const navLinks: NavLinkType[] = [
     name: 'For investors',
     url: '/investors',
     theme: 'light'
+  },
+  {
+    name: 'divi',
   },
   {
     name: 'Value my property',

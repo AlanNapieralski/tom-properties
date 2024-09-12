@@ -28,7 +28,7 @@ export default function SideNav({ triggerButton }: SideNavProps) {
           <SheetTitle className="text-2xl">{title}</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col py-8">
-          {navigationLinks.map((item, index) => (
+          {navigationLinks.map((item, index) => item.url ? (
             <React.Fragment key={index}>
               <Separator className="border" />
               <SheetClose asChild>
@@ -40,7 +40,7 @@ export default function SideNav({ triggerButton }: SideNavProps) {
                 </Link>
               </SheetClose>
             </React.Fragment>
-          ))}
+          ) : null)}
         </div>
       </SheetContent>
 

@@ -17,13 +17,20 @@ export default function ValuePropertyForm({ className = '' }) {
 
   const router = useRouter()
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isClicked, setIsClicked] = useState(false)
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
 
   const FormSchema = z.object({
     postcode: z.string()
       .min(6, { message: "Enter your postcode and select from the dropdown below" })
       .max(8, { message: "Enter your postcode and select from the dropdown below" }),
+    email: z.string()
+      .min(1, { message: "Email is required" })
+      .email({ message: "Must be email format: example@email.com" }),
     selAddress: z.string({
       required_error: "Please select the address.",
     }),
@@ -46,14 +53,48 @@ export default function ValuePropertyForm({ className = '' }) {
 
   const { toast } = useToast()
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true)
-    reset()
 
-    toast({
-      title: 'Thank you!',
-      description: "We've received your inquiry"
-    })
+    try {
+      const response: Response = await fetch('/api/sendValueForm', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        toast({
+          title: 'There has been issues submitting the form.',
+          description: "Please try again later",
+          variant: 'destructive',
+        })
+
+        reset()
+        router.refresh()
+        return
+      }
+
+      reset()
+      toast({
+        title: 'Thank you!',
+        description: "We've received your inquiry"
+      })
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+
+      reset()
+      toast({
+        title: 'The form is not been submitted due to internal errors.',
+        description: "Please try again later",
+        variant: 'destructive',
+      })
+    } finally {
+      setIsLoading(false)
+    }
 
     router.push('/')
   }
@@ -65,6 +106,20 @@ export default function ValuePropertyForm({ className = '' }) {
         <h1 className='flex justify-center items-center text-5xl text-secondary font-bold mb-8'>Let us valuate your property</h1>
 
         <div className='grid grid-cols-4 gap-y-4 gap-x-12 items-start w-full'>
+          <FormField
+            control={form.control}
+            name='email'
+            render={({ field }) => (
+              <FormItem className="col-span-full pb-[14px]">
+                <FormLabel className="font-bold text-secondary m-2 flex items-end">Email</FormLabel>
+                <FormControl>
+                  <Input className="p-4 border-2 border-primary " type="email" {...field} />
+                </FormControl>
+                <FormMessage className="font-bold pt-1" />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="postcode"

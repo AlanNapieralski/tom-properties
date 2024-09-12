@@ -16,7 +16,7 @@ export default function Welcome() {
   }, [])
 
   return (
-    <section className="flex flex-col mb-16 h-[calc(88vh-6rem)]">
+    <section className="flex flex-col h-[calc(88vh-6rem)]">
       <div className='relative overflow-hidden h-full'>
         <div className='absolute inset-0 h-full'>
           {images.map((img, idx) => (
@@ -33,10 +33,10 @@ export default function Welcome() {
         </h1>
       </div>
 
-      <div className="flex justify-center items-center py-2 bg-primary text-secondary shadow-bottom h-20">
+      <div className="flex justify-center items-center py-2 bg-primary text-secondary shadow-bottom h-16">
         {welcome.strip.map((word, index) => (
           <div key={index} className='flex justify-center items-center'>
-            <p className='text-2xl px-4 font-bold uppercase'>{word}</p>
+            <p className='text-2xl px-4 font-bold'>{word}</p>
             {welcome.strip.length - 1 === index ? null : <div className="dot-white"></div>}
           </div>
         ))}
