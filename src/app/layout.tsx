@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
 import Nav from '@/components/sections/shared/Nav'
 import Footer from '@/components/sections/shared/Footer'
+import { Toaster } from '@/components/ui/toaster'
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -26,7 +27,8 @@ export default function RootLayout({ children }:
         <Nav />
         <main>{children}</main>
         <Footer />
+        <Toaster />
       </body>
-    </html >
+    </html>
   )
 }

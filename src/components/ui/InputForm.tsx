@@ -18,6 +18,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
+import { toast } from "@/hooks/use-toast"
+import { Loader2 } from "lucide-react"
 
 const FormSchema = z.object({
   name: z.string()
@@ -29,6 +31,7 @@ const FormSchema = z.object({
     .min(1, { message: "Email is required" })
     .email({ message: "Must be email format: example@email.com" }),
   tel: z.string()
+    .max(15, { message: "Phone number is too long" })
     .regex(/^\d*$/, { message: "Phone number must contain only digits." })
     .optional(),
   message: z.string()
@@ -39,6 +42,9 @@ const FormSchema = z.object({
 })
 
 export default function InputForm({ className = '', submitStyle = '' }: { className?: string, submitStyle?: string }) {
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -49,15 +55,20 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
     },
   })
 
+  const { reset } = form
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log('submitted')
+    setIsLoading(true)
+    reset()
+    toast({
+      title: 'Thank you!',
+      description: "We've received your inquiry"
+    })
+
+    // finally
+    setIsLoading(false)
   }
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setIsLoading(true)
-  }, [])
 
   return (
     <Form {...form}>
@@ -127,7 +138,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
           />
         </div>
 
-        <Button disabled={!isLoading} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
+        <Button disabled={isLoading} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
       </form>
     </Form >
   )

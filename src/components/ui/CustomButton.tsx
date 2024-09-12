@@ -7,14 +7,15 @@ export type CustomButtonProps = {
   children: React.ReactNode
   theme?: 'dark' | 'light'
   className?: string
+  disabled?: boolean
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 
-const CustomButton = ({ buttonType = 'button', action = (() => null), children, theme = 'dark', className = "", ...props }: CustomButtonProps) => {
+const CustomButton = ({ buttonType = 'button', action = (() => null), children, theme = 'dark', className = "", disabled, ...props }: CustomButtonProps) => {
   return (
     <>
       {buttonType === "button" && typeof action === "function" ? (
-        <button {...props} onClick={action} className={`btn disabled:text-secondary border-secondary rounded-md border-solid h-10 min-h-0 ${theme === 'dark' ? 'bg-primary text-secondary hover:bg-secondary hover:text-primary' : 'bg-secondary text-primary hover:bg-primary hover:text-secondary'}  text-normal font-bold shadow-md ${className}`}>
+        <button disabled={disabled} {...props} onClick={action} className={`btn disabled:text-secondary border-secondary rounded-md border-solid h-10 min-h-0 ${theme === 'dark' ? 'bg-primary text-secondary hover:bg-secondary hover:text-primary' : 'bg-secondary text-primary hover:bg-primary hover:text-secondary'}  text-normal font-bold shadow-md ${className}`}>
           {children}
         </button >
       ) : buttonType === "link" && typeof action === "string" ? (

@@ -10,8 +10,15 @@ import { z } from "zod"
 import { Combobox } from './Combobox'
 import { valuationTypes, propertyTypes, noOfBeds, addresses } from '@/models/valueProperty-content'
 import { useEffect, useState } from 'react'
+import { useToast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation'
 
 export default function ValuePropertyForm({ className = '' }) {
+
+  const router = useRouter()
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isClicked, setIsClicked] = useState(false)
 
   const FormSchema = z.object({
     postcode: z.string()
@@ -35,20 +42,21 @@ export default function ValuePropertyForm({ className = '' }) {
     resolver: zodResolver(FormSchema),
   })
 
-  const { register, handleSubmit, watch, formState: { errors }, trigger } = form;
+  const { handleSubmit, formState: { errors }, trigger, reset } = form;
+
+  const { toast } = useToast()
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log('submitted')
-  }
-
-  const [isClicked, setIsClicked] = useState(false)
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
     setIsLoading(true)
-  }, [])
+    reset()
 
+    toast({
+      title: 'Thank you!',
+      description: "We've received your inquiry"
+    })
+
+    router.push('/')
+  }
 
   return (
     <Form {...form} >
@@ -69,7 +77,7 @@ export default function ValuePropertyForm({ className = '' }) {
               </FormItem>
             )}
           />
-          <Button disabled={!isLoading} buttonType='button' theme='dark' action={(e) => {
+          <Button disabled={isLoading} buttonType='button' theme='dark' action={(e) => {
             e.preventDefault()
             trigger('postcode').then(val => val ? setIsClicked(true) : null)
           }} className="col-span-2">Find address</Button>
@@ -130,7 +138,7 @@ export default function ValuePropertyForm({ className = '' }) {
             )}
           />
         </div>
-        <Button disabled={!isLoading} buttonType='button' type="submit" theme='dark' action={(() => null)} className="my-12 w-1/4">Submit</Button>
+        <Button disabled={isLoading} buttonType='button' type="submit" theme='dark' className="my-12 w-1/4">Submit</Button>
       </form>
     </Form >
   )
