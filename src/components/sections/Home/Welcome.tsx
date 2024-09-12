@@ -35,10 +35,10 @@ export default function Welcome() {
 
       <div className="flex justify-center items-center py-2 bg-primary text-secondary shadow-bottom h-20">
         {welcome.strip.map((word, index) => (
-          <>
+          <div key={index} className='flex justify-center items-center'>
             <p className='text-2xl px-4 font-bold uppercase'>{word}</p>
             {welcome.strip.length - 1 === index ? null : <div className="dot-white"></div>}
-          </>
+          </div>
         ))}
       </div>
 

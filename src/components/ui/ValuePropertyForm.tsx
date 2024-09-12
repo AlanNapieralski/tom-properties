@@ -2,8 +2,7 @@
 import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormLabel, FormMessage, FormField, FormItem } from '@/components/ui/form'
 
-import Button from './CustomButton'
-import type { CustomButtonProps } from './CustomButton'
+import Button from '@/components/ui/CustomButton'
 import { toast } from "@/hooks/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -72,13 +71,13 @@ export default function ValuePropertyForm({ className = '' }) {
             render={({ field }) => (
               <FormItem className='col-span-2'>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary " placeholder='Enter your postcode here' type="text" />
+                  <Input className="p-4 border-2 border-primary " placeholder='Enter your postcode here' type="text"  {...field} />
                 </FormControl>
                 <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
-          <Button disabled={!isLoading} componentType='button' theme='dark' action={(e) => {
+          <Button disabled={!isLoading} buttonType='button' theme='dark' action={(e) => {
             e.preventDefault()
             trigger('postcode').then(val => val ? setIsClicked(true) : null)
           }} className="col-span-2">Find address</Button>
@@ -139,7 +138,7 @@ export default function ValuePropertyForm({ className = '' }) {
             )}
           />
         </div>
-        <Button disabled={!isLoading} componentType='button' type="submit" theme='dark' action={(() => null)} className="my-12 w-1/4">Submit</Button>
+        <Button disabled={!isLoading} buttonType='button' type="submit" theme='dark' action={(() => null)} className="my-12 w-1/4">Submit</Button>
       </form>
     </Form >
   )

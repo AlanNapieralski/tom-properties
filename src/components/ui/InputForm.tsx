@@ -6,6 +6,7 @@ import { z } from "zod"
 import { useState, useEffect } from "react"
 
 import { toast } from "@/hooks/use-toast"
+import { CustomButtonProps } from "@/components/ui/CustomButton"
 import Button from "@/components/ui/CustomButton"
 import {
   Form,
@@ -135,7 +136,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
           />
         </div>
 
-        <Button disabled={!isLoading} componentType='button' type="submit" action={(() => null)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
+        <Button disabled={!isLoading} type="submit" action={(() => null)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
       </form>
     </Form >
   )

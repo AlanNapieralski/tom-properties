@@ -61,7 +61,7 @@ export function Combobox({ className = '', label, searchPlaceholder, itemIdentif
                 <CommandItem
                   key={item.value}
                   value={item.value}
-                  className="justify-center"
+                  className=""
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)

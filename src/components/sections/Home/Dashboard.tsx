@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Buttom from '@/components/ui/CustomButton'
+import Button from '@/components/ui/CustomButton'
 
 export default function Dashboard() {
 
@@ -17,7 +17,7 @@ export default function Dashboard() {
         <div className="absolute inset-0 bg-red-900 bg-blend-lighten transition duration-300 ease-in-out opacity-40 group-hover:opacity-20 hover:bg-blend-darken rounded-md"></div>
         <div className="absolute flex flex-col inset-0 items-center justify-center gap-8">
           <h2 className="text-6xl font-bold text-white drop-shadow-2xl underline">For Landlords</h2>
-          <Buttom type="link" action="/landlords" theme="light" className="border-none">Read More</Buttom>
+          <Button buttonType="link" action="/landlords" theme="light" className="border-none">Read More</Button>
         </div>
       </div>
       <div className="relative h-96 group">
@@ -31,7 +31,7 @@ export default function Dashboard() {
         <div className="absolute inset-0 bg-blue-900 bg-blend-lighten transition duration-300 ease-in-out opacity-40 group-hover:opacity-20 hover:bg-blend-darken rounded-md"></div>
         <div className="absolute flex flex-col inset-0 items-center justify-center gap-8">
           <h2 className="text-6xl font-bold text-white drop-shadow-lg underline">For Tenants</h2>
-          <Buttom type="link" action="/tenants" theme="light" className="border-none">Read More</Buttom>
+          <Button buttonType="link" action="/tenants" theme="light" className="border-none">Read More</Button>
         </div>
       </div>
       <div className="relative h-96 group">
@@ -45,7 +45,7 @@ export default function Dashboard() {
         <div className="absolute inset-0 bg-green-900 bg-blend-lighten transition duration-300 ease-in-out opacity-40 group-hover:opacity-20 hover:bg-blend-darken rounded-md shadow-md"></div>
         <div className="absolute flex flex-col inset-0 items-center justify-center gap-8">
           <h2 className="text-6xl font-bold text-white drop-shadow-lg underline">For investors</h2>
-          <Buttom type="link" action="/investors" theme="light" className="border-none">Read More</Buttom>
+          <Button buttonType="link" action="/investors" theme="light" className="border-none">Read More</Button>
         </div>
       </div>
       <div className="relative h-96 group">
@@ -59,7 +59,7 @@ export default function Dashboard() {
         <div className="absolute inset-0 bg-orange-900 bg-blend-lighten transition duration-300 ease-in-out opacity-40 group-hover:opacity-20 hover:bg-blend-darken rounded-md"></div>
         <div className="absolute flex flex-col inset-0 items-center justify-center gap-8">
           <h2 className="text-6xl font-bold text-white drop-shadow-lg underline">Value my Property</h2>
-          <Buttom type="link" action="/value-my-property" theme="light" className="border-none">Read More</Buttom>
+          <Button buttonType="link" action="/value-my-property" theme="light" className="border-none">Read More</Button>
         </div>
       </div>
     </section>

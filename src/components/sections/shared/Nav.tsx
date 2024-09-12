@@ -42,7 +42,7 @@ const Nav: FC = () => {
       <nav className='flex flex-row gap-12 items-center h-full'>
         <div className="flex-grow flex justify-center items-center gap-x-4 h-full">
           {navLinks.map((item, index) => {
-            return <Button key={index} componentType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+            return <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
           })}
         </div>
 
