@@ -20,7 +20,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { toast } from "@/hooks/use-toast"
 import { Loader2 } from "lucide-react"
-import { NextResponse } from "next/server"
 
 const FormSchema = z.object({
   name: z.string()
@@ -45,6 +44,7 @@ const FormSchema = z.object({
 export default function InputForm({ className = '', submitStyle = '' }: { className?: string, submitStyle?: string }) {
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setIsLoading(false)
@@ -63,7 +63,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
   const { reset } = form
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setIsLoading(true)
+    setIsSubmitting(true)
 
     try {
       const response: Response = await fetch('/api/sendForm', {
@@ -100,13 +100,13 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
         variant: 'destructive',
       })
     } finally {
-      setIsLoading(false)
+      setIsSubmitting(false)
     }
   }
 
   return (
     <Form {...form}>
-      <form action='/api/sendForm' method="POST" onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `} noValidate>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={`flex flex-col justify-between items-center h-full `} noValidate>
         <div className={cn(`flex flex-col space-y-4 w-full ` + className)}>
           <FormField
             control={form.control}
@@ -172,7 +172,12 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
           />
         </div>
 
-        <Button disabled={isLoading} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>Submit</Button>
+        <Button disabled={isLoading || isSubmitting} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>
+          {isLoading || isSubmitting ? <span className="loading loading-spinner"></span> : null}
+          {isSubmitting ? 'Submitting' : null}
+          {isLoading ? 'Loading' : null}
+          {!isLoading && !isSubmitting ? 'Submit' : null}
+        </Button>
       </form>
     </Form >
   )

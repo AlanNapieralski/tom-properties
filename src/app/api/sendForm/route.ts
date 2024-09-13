@@ -1,13 +1,20 @@
 import { ContactEmailTemplate, ContactEmailTemplateProps } from '@/components/contact-email-template';
-import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { from, to } from '@/models/email-data'
 import { title } from '@/models/site-metadata'
+import { NextApiRequest, NextApiResponse } from 'next'
+
+import rateLimiter from '@/middleware/rateLimiter'
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(req: NextRequest) {
-  const props: ContactEmailTemplateProps = await req.json()
+const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' }); // Handle non-POST methods
+  }
+
+  const props: ContactEmailTemplateProps = await req.body
 
   try {
     const { data, error } = await resend.emails.send({
@@ -18,11 +25,13 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-      return NextResponse.json({ error: 'Could not send the email.' }, { status: 500 })
+      return res.status(500).json({ error: { errorBody: error, errorMessage: 'Could not send the email' } })
     }
 
-    return NextResponse.json({ data });
+    return res.json({ data });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
+    return res.status(500).json({ error })
   }
 }
+
+export const POST = rateLimiter(postHandler)
