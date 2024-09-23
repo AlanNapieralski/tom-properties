@@ -1,2 +1,2 @@
-export const from = ''
-export const to = '!tomnascar@yahoo.co.uk'
+export const from = 'Acme <onboarding@resend.dev>'
+export const to = 'a.napieralski@lancaster.ac.uk'

@@ -2,19 +2,18 @@ import { ContactEmailTemplate, ContactEmailTemplateProps } from '@/components/co
 import { Resend } from 'resend';
 import { from, to } from '@/models/email-data'
 import { title } from '@/models/site-metadata'
-import { NextApiRequest, NextApiResponse } from 'next'
-
-import rateLimiter from '@/middleware/rateLimiter'
+import { NextRequest } from 'next/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+export async function POST (req: NextRequest) {
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' }); // Handle non-POST methods
+    return Response.json({ error: 'Method Not Allowed' }, {status: 405})
   }
 
-  const props: ContactEmailTemplateProps = await req.body
+  const props: ContactEmailTemplateProps = await req.json()
+  console.log(props)
 
   try {
     const { data, error } = await resend.emails.send({
@@ -24,14 +23,14 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       react: ContactEmailTemplate({ ...props }),
     });
 
+    console.log(error)
+
     if (error) {
-      return res.status(500).json({ error: { errorBody: error, errorMessage: 'Could not send the email' } })
+      return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later'}, title: "Could not send the email" }, { status: 500})
     }
 
-    return res.json({ data });
+    return Response.json({ data });
   } catch (error) {
-    return res.status(500).json({ error })
+    return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later'}, title: "Could not send the email" }, { status: 500})
   }
 }
-
-export const POST = rateLimiter(postHandler)

@@ -74,10 +74,12 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
         body: JSON.stringify(data),
       });
 
+      const body = await response.json()
+
       if (!response.ok) {
         toast({
-          title: 'There has been issues submitting the form.',
-          description: "Please try again later",
+          title: body.title,
+          description: body.error.errorMessage,
           variant: 'destructive',
         })
         reset()
