@@ -14,12 +14,14 @@ const redis = new Redis({
 // Create a new ratelimiter, that allows 3 requests per 24 hours per ip address
 const ratelimit = new Ratelimit({
   redis: redis,
-  limiter: Ratelimit.fixedWindow(3, "24 h"),
+  limiter: Ratelimit.fixedWindow(3, "1 d"),
 });
  
 export async function middleware(req: NextRequest, res: NextResponse) {
     // Identifier could be user-specific or request-specific (e.g., API key, IP address, etc.)
-    const identifier = req.headers.get('x-forwarded-for') || "api";
+    console.log(req.headers)
+    const original_uri = req.headers.get('x-original-uri')?.replaceAll('/', '') || ''
+    const identifier = original_uri + req.headers.get('x-forwarded-for') || "api";
     const result = await ratelimit.limit(identifier as string);
 
     // Set rate limit headers
@@ -40,5 +42,5 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 }
 
 export const config = {
-    matcher: ['/api/sendForm', '/api/sendValueForm'],
-  }
+  matcher: ['/api/sendForm', '/api/sendValueForm'],
+}
