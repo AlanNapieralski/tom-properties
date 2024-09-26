@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-import navigationLinks from "@/models/navigation-links"
+import { homeLink, mainLinks, secondaryLinks } from "@/models/navigation-links"
 import { title } from "@/models/site-metadata"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
@@ -18,6 +18,9 @@ type SideNavProps = {
 }
 
 export default function SideNav({ triggerButton }: SideNavProps) {
+
+  const links = homeLink.concat(mainLinks, secondaryLinks)
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -28,7 +31,7 @@ export default function SideNav({ triggerButton }: SideNavProps) {
           <SheetTitle className="text-2xl">{title}</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col py-8">
-          {navigationLinks.map((item, index) => item.url ? (
+          {links.map((item, index) => item.url ? (
             <React.Fragment key={index}>
               <Separator className="border" />
               <SheetClose asChild>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import navLinks from '@/models/navigation-links'
+import { homeLink, mainLinks, secondaryLinks } from '@/models/navigation-links'
 import Image from 'next/image'
 import SideNav from '@/components/ui/SideNav'
 import Button from '@/components/ui/CustomButton'
@@ -41,14 +41,26 @@ const Nav: FC = () => {
         />
       </div>
       <nav className='flex flex-row gap-12 items-center h-full'>
-        <div className="flex-grow flex justify-center items-center gap-x-4 h-full">
-          {navLinks.map((item, index) => {
-            return item.name === 'divi' ? <Separator orientation='vertical' className='border-[1px] rounded-md border-primary'></Separator> : <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
-          })}
+        <div className="flex justify-center items-center gap-x-4 h-full">
+          <div className="hidden md:flex justify-center items-center gap-x-4 h-full">
+            {homeLink.map((item, index) => {
+              return item.name === 'divi' ? <Separator orientation='vertical' className='border-[1px] rounded-md border-primary'></Separator> : <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+            })}
+          </div>
+          <div className="hidden flex-grow 2xl:flex justify-center items-center gap-x-4 h-full">
+            {secondaryLinks.map((item, index) => {
+              return item.name === 'divi' ? <Separator orientation='vertical' className='border-[1px] rounded-md border-primary'></Separator> : <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+            })}
+          </div>
+          <div className="hidden flex-grow md:flex justify-center items-center gap-x-4 h-full">
+            {mainLinks.map((item, index) => {
+              return item.name === 'divi' ? <Separator orientation='vertical' className='border-[1px] rounded-md border-primary'></Separator> : <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+            })}
+          </div>
         </div>
 
         <SideNav triggerButton={
-          <button className='group aspect-square h-full bg-secondary rounded border-none'>
+          <button className='2xl:hidden group aspect-square h-full bg-secondary rounded border-none'>
             <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
           </button>
         } />

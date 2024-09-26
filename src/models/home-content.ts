@@ -1,7 +1,10 @@
 // Welcome
 export const welcome = {
   title: 'Main Welcome Text on the Page',
-  strip: ['Home Renovation', 'Bathrooms', 'For Landlords', 'For Tenants', 'For Investors']
+  strip: {
+    main: ['For Landlords', 'For Tenants', 'For Investors'],
+    secondary: ['Home Renovation', 'Bathrooms']
+  }
 }
 
 export type ImageProps = {
