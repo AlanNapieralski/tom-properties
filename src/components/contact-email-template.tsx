@@ -16,7 +16,7 @@ export const ContactEmailTemplate: React.FC<Readonly<ContactEmailTemplateProps>>
   <div>
     <p>
       <span style={{ fontWeight: 'bold' }}>Customer: </span>
-      <span>{name}, have contacted you!</span>
+      <span>{name}</span>
     </p>
     <p>
       <span style={{ fontWeight: 'bold' }}>Email: </span>

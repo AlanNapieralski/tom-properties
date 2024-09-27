@@ -15,7 +15,7 @@ const CustomButton = ({ buttonType = 'button', action = (() => null), children, 
   return (
     <>
       {buttonType === "button" && typeof action === "function" ? (
-        <button disabled={disabled} {...props} onClick={action} className={`btn disabled:text-secondary border-secondary rounded-md border-solid h-10 min-h-0 ${theme === 'dark' ? 'bg-primary text-secondary hover:bg-secondary hover:text-primary' : 'bg-secondary text-primary hover:bg-primary hover:text-secondary'}  text-normal font-bold shadow-md ${className}`}>
+        <button disabled={disabled} {...props} onClick={action} className={`btn disabled:text-secondary disabled:bg-primary disabled:opacity-[40%] disabled:text-opacity-100 border-secondary rounded-md border-solid h-10 min-h-0 ${theme === 'dark' ? 'bg-primary text-secondary hover:bg-secondary hover:text-primary' : 'bg-secondary text-primary hover:bg-primary hover:text-secondary'}  text-normal font-bold shadow-md ${className}`}>
           {children}
         </button >
       ) : buttonType === "link" && typeof action === "string" ? (

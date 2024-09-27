@@ -18,6 +18,7 @@ export default function ValuePropertyForm({ className = '' }) {
   const router = useRouter()
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isClicked, setIsClicked] = useState(false)
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export default function ValuePropertyForm({ className = '' }) {
   const { toast } = useToast()
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setIsLoading(true)
+    setIsSubmitting(true)
 
     try {
       const response: Response = await fetch('/api/sendValueForm', {
@@ -65,10 +66,12 @@ export default function ValuePropertyForm({ className = '' }) {
         body: JSON.stringify(data),
       });
 
+      const body = await response.json()
+
       if (!response.ok) {
         toast({
-          title: 'There has been issues submitting the form.',
-          description: "Please try again later",
+          title: body.title,
+          description: body.error.errorBody,
           variant: 'destructive',
         })
 
@@ -93,7 +96,7 @@ export default function ValuePropertyForm({ className = '' }) {
         variant: 'destructive',
       })
     } finally {
-      setIsLoading(false)
+      setIsSubmitting(false)
     }
 
     router.push('/')
@@ -193,7 +196,12 @@ export default function ValuePropertyForm({ className = '' }) {
             )}
           />
         </div>
-        <Button disabled={isLoading} buttonType='button' type="submit" theme='dark' className="my-12 w-1/4">Submit</Button>
+        <Button disabled={isLoading || isSubmitting} buttonType='button' type="submit" theme='dark' className="my-12 w-1/4">
+          {isLoading || isSubmitting ? <span className="loading loading-spinner"></span> : null}
+          {isSubmitting ? 'Submitting' : null}
+          {isLoading ? 'Loading' : null}
+          {!isLoading && !isSubmitting ? 'Submit' : null}
+        </Button>
       </form>
     </Form >
   )

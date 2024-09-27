@@ -1,5 +1,5 @@
 import { ValuationEmailTemplate } from '@/components/valuation-email-template';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { ValuationEmailTemplateProps } from '@/components/valuation-email-template';
 import { Resend } from 'resend';
 import { from, to } from '@/models/email-data'
@@ -9,7 +9,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   const props: ValuationEmailTemplateProps = await req.json()
-  console.log(props)
 
   try {
     const { data, error } = await resend.emails.send({
@@ -20,11 +19,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-      return NextResponse.json({ error }, { status: 500 })
+      return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later'}, title: "Could not send the email" }, { status: 500})
     }
 
-    return NextResponse.json({ data });
+    return Response.json({ data });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
+    return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later'}, title: "Could not send the email" }, { status: 500})
   }
 }
