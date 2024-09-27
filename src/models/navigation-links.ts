@@ -4,15 +4,31 @@ export type NavLinkType = {
   theme?: 'dark' | 'light'
 }
 
-const navLinks: NavLinkType[] = [
+const homeLink: NavLinkType[] = [
   {
     name: 'Home',
     url: '/',
     theme: 'dark'
-  },
+  }
+]
+
+const mainLinks: NavLinkType[] = [
   {
     name: 'divi',
   },
+  {
+    name: 'Value my property',
+    url: '/value-my-property',
+    theme: 'dark'
+  },
+  {
+    name: 'Contact Us',
+    url: '/#contact-us',
+    theme: 'dark'
+  }
+]
+
+const secondaryLinks: NavLinkType[] = [
   {
     name: 'Home Renovation',
     url: '/renovation',
@@ -41,19 +57,10 @@ const navLinks: NavLinkType[] = [
     url: '/investors',
     theme: 'light'
   },
-  {
-    name: 'divi',
-  },
-  {
-    name: 'Value my property',
-    url: '/value-my-property',
-    theme: 'dark'
-  },
-  {
-    name: 'Contact Us',
-    url: '/#contact-us',
-    theme: 'dark'
-  }
 ]
 
-export default navLinks
+export {
+  homeLink,
+  mainLinks,
+  secondaryLinks
+}
