@@ -43,18 +43,18 @@ export default function Welcome() {
         ))}
       </div>
       <div className='lg:hidden lg:justify-around'>
-        <div className="flex lg:flex-1 justify-center items-center py-2 bg-primary text-secondary h-12">
+        <div className="flex lg:flex-1 justify-center items-center py-2 bg-primary text-secondary h-fit border-none">
           {welcome.strip.secondary.map((word, index) => (
             <div key={index} className='flex justify-center items-center'>
-              <p className='text-lg text-center sm:text-2xl px-4 font-bold'>{word}</p>
+              <p className='text-center sm:text-2xl px-4 font-bold'>{word}</p>
               {welcome.strip.secondary.length - 1 === index ? null : <div className="dot-white"></div>}
             </div>
           ))}
         </div>
-        <div className="flex lg:flex-1 justify-center items-center py-2 bg-primary text-secondary h-12">
+        <div className="flex lg:flex-1 justify-center items-center py-2 bg-primary text-secondary h-fit border-none">
           {welcome.strip.main.map((word, index) => (
             <div key={index} className='flex justify-center items-center'>
-              <p className='text-lg text-center text-wrap sm:text-2xl px-4 font-bold'>{word}</p>
+              <p className='text-center break-words sm:text-2xl px-2 sm:px-4 font-bold sm:w-full'>{word}</p>
               {welcome.strip.main.length - 1 === index ? null : <div className="dot-white"></div>}
             </div>
           ))}

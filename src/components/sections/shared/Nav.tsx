@@ -30,7 +30,7 @@ const Nav: FC = () => {
 
 
   return (
-    <header className={`fixed inset-0 w-screen flex items-center justify-between pr-12 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'h-16 p-2 opacity-95' : 'h-24 p-4 opacity-100 '} `}>
+    <header className={`sticky p-2 sm:fixed h-16 inset-0 w-screen flex items-center justify-between pr-6 sm:pr-12 bg-secondary shadow-bottom z-50 transition-all duration-200 ease-in-out ${isSticky ? 'sm:h-16 sm:p-2 sm:opacity-95' : 'sm:h-24 sm:p-4 sm:opacity-100 '} `}>
       <div className="h-full">
         <Image
           src='/assets/logo.png'

@@ -46,6 +46,25 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [isMobileView, setIsMobileView] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 425) {
+        setIsMobileView(true)
+      } else {
+        setIsMobileView(false)
+      }
+    };
+
+    handleResize()
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
+
   useEffect(() => {
     setIsLoading(false)
   }, [])
@@ -117,13 +136,13 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
               <FormItem>
                 <FormLabel className="text-xl font-bold">Full Name</FormLabel>
                 <FormControl>
-                  <Input className="p-4 border-2 border-primary w-1/3" type="text" {...field} />
+                  <Input className="p-4 border-2 border-primary sm:w-1/3" type="text" {...field} />
                 </FormControl>
                 <FormMessage className="font-bold pt-1" />
               </FormItem>
             )}
           />
-          <div className="flex justify-between gap-12">
+          <div className="flex justify-between gap-4 lg:gap-12">
 
             <FormField
               control={form.control}
@@ -132,7 +151,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
                 <FormItem className="flex-1">
                   <FormLabel className="text-xl font-bold">Email</FormLabel>
                   <FormControl>
-                    <Input className="p-4 border-2 border-primary" type="email" {...field} />
+                    <Input className={`${isMobileView ? 'text-[0.9rem] p-2' : 'text-sm p-4'} border-2 border-primary`} type="email" {...field} />
                   </FormControl>
                   <FormMessage className="font-bold pt-1" />
                 </FormItem>
@@ -144,9 +163,9 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
               name='tel'
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel className="text-xl font-bold">Phone Number</FormLabel>
+                  <FormLabel className="text-xl font-bold">{isMobileView ? 'Phone no.' : 'Phone Number'}</FormLabel>
                   <FormControl>
-                    <Input className="p-4 border-2 border-primary" type="tel" {...field} />
+                    <Input className={`${isMobileView ? 'text-[0.9rem] p-2' : 'text-sm p-4'} border-2 border-primary`} type="tel" {...field} />
                   </FormControl>
                   <FormMessage className="font-bold pt-1" />
                 </FormItem>
@@ -174,7 +193,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
           />
         </div>
 
-        <Button disabled={isLoading || isSubmitting} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/4 bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>
+        <Button disabled={isLoading || isSubmitting} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/2 lg:w-1/4 mx-auto lg:mx-0 lg:mr-auto bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>
           {isLoading || isSubmitting ? <span className="loading loading-spinner"></span> : null}
           {isSubmitting ? 'Submitting' : null}
           {isLoading ? 'Loading' : null}
