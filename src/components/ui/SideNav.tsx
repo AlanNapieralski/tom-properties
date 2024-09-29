@@ -19,7 +19,7 @@ type SideNavProps = {
 
 export default function SideNav({ triggerButton }: SideNavProps) {
 
-  const links = homeLink.concat(mainLinks, secondaryLinks)
+  const links = homeLink.concat(secondaryLinks, mainLinks)
 
   return (
     <Sheet>

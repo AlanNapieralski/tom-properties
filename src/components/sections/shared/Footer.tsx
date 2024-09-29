@@ -4,8 +4,8 @@ import { fullTitle, description } from "@/models/site-metadata"
 export default function Footer({ className = "" }) {
   return (
     <>
-      <footer className={"relative flex justify-around items-center bg-primary text-secondary p-10 z-50 " + className}>
-        <div className="footer justify-center gap-16">
+      <footer className={"relative flex justify-around items-center bg-primary text-secondary px-4 sm:px-10 py-10 z-50 " + className}>
+        <div className="footer grid-flow-col justify-center gap-8 sm:gap-16">
           <nav>
             <h6 className="footer-title">Services</h6>
             <a href="/landlords" className="link link-hover">For Landlords</a>
@@ -30,12 +30,12 @@ export default function Footer({ className = "" }) {
           alt='logo'
           width={360}
           height={360}
-          className={`absolute right-10 h-16 w-auto`}
+          className={`hidden md:block absolute right-10 h-16 w-auto`}
         />
       </footer>
-      <footer className="footer bg-primary text-secondary border-base-300 border-t px-10 py-4">
-        <aside className="grid grid-cols-3 items-center w-full">
-          <nav className="md:place-self-center md:justify-self-start">
+      <footer className="footer bg-primary text-secondary border-base-300 border-t px-4 sm:px-10 py-4">
+        <aside className="flex flex-col-reverse sm:flex-row-reverse justify-between gap-8 lg:gap-0 lg:grid lg:grid-cols-4 items-center w-full">
+          <nav className="place-self-center justify-self-start">
             <div className="grid grid-flow-col gap-4">
               <a>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
@@ -64,7 +64,7 @@ export default function Footer({ className = "" }) {
               </a>
             </div>
           </nav>
-          <p className="col-start-2 justify-self-center">
+          <p className="lg:col-start-2 lg:col-span-2 lg:justify-self-center">
             {fullTitle}
             <br />
             {description}

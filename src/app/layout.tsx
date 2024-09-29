@@ -5,6 +5,7 @@ import { Lato } from 'next/font/google'
 import Nav from '@/components/sections/shared/Nav'
 import Footer from '@/components/sections/shared/Footer'
 import { Toaster } from '@/components/ui/toaster'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -23,11 +24,12 @@ export default function RootLayout({ children }:
 
   return (
     <html lang="en" className='scroll-smooth'>
-      <body className={lato.className + " !pt-24 tracking-wider"}>
+      <body className={lato.className + " sm:!pt-24 tracking-wider"}>
         <Nav />
         <main>{children}</main>
         <Footer />
         <Toaster />
+        <SpeedInsights />
       </body>
     </html>
   )

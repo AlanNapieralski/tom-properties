@@ -1,9 +1,9 @@
 export default function ArticleSnippetWithButton({ title, text, transitionClasses }: { title: string, text: string, transitionClasses: string }) {
 
   return (
-    <article className={`flex flex-col gap-2 w-[700px] ${transitionClasses}`}>
-      <h1 className="text-5xl font-bold text-secondary mb-4">{title}</h1>
-      <p className="text-lg text-secondary">{text}</p>
+    <article className={`flex flex-col gap-4 xl:min-w-[460px] max-w-[700px] my-8 ${transitionClasses}`}>
+      <h1 className="text-4xl sm:text-5xl font-bold text-secondary text-center xl:text-start">{title}</h1>
+      <p className="sm:text-lg text-secondary text-start">{text}</p>
     </article>
   )
 }

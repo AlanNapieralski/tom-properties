@@ -4,10 +4,10 @@ import InputForm from "@/components/ui/InputForm"
 export default function ContactUs() {
 
   return (
-    <section id="contact-us" className="flex flex-col gap-8 w-full px-36 pb-16 pt-16">
+    <section id="contact-us" className="flex flex-col gap-8 w-full pb-16 pt-16">
       <h2 className="text-4xl font-bold text-center drop-shadow-lg underline">Contact Us</h2>
       <div className="flex gap-4 h-[450px] ">
-        <div className="flex-1 h-full">
+        <div className="flex-1 h-full hidden lg:block">
           <Image
             src='/assets/images/contact-us.jpg'
             alt="something"
@@ -17,7 +17,7 @@ export default function ContactUs() {
           />
         </div>
         <div className="flex-[2] px-1 h-full">
-          <InputForm submitStyle="mr-auto" />
+          <InputForm submitStyle="lg:ml-0" />
         </div>
       </div>
     </section>

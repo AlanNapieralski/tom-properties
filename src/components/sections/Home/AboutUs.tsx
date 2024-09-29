@@ -4,20 +4,22 @@ import Button from '@/components/ui/CustomButton'
 
 export default function AboutUs() {
   return (
-    <section id='about-us' className="flex mb-16 gap-8 mt-16">
-      <div className="flex-1 h-96">
+    <section id='about-us' className="flex flex-col lg:flex-row mb-16 gap-8 mt-16">
+      <div className="lg:flex-1 w-full h-64 md:h-80 lg:h-96">
         <Image
           src='/assets/images/aboutus.jpg'
           alt="picture of us"
           width={612}
           height={408}
-          className="object-cover w-full h-full rounded shadow-2xl"
+          className="object-cover w-full md:w-auto md:mx-auto h-full rounded shadow-2xl"
         />
       </div>
-      <div className="flex-1 flex flex-col">
-        <h2 className="text-4xl font-bold pb-2">{aboutUs.title}</h2>
-        <p className="pb-10 break-words">{aboutUs.text}</p>
-        <Button buttonType="link" action='#contact-us' className="w-1/3 mt-auto">Contact Us</Button>
+      <div className="md:flex-1 flex flex-col justify-between">
+        <div>
+          <h2 className="text-4xl font-bold pb-2 w-fit mx-auto lg:mx-0">{aboutUs.title}</h2>
+          <p className="lg:text-normal xl:text-lg pb-8 break-words">{aboutUs.text}</p>
+        </div>
+        <Button buttonType="link" action='#contact-us' className="w-1/2 sm:w-1/3 h-16 lg:h-12 mx-auto lg:mr-auto lg:mx-0">Contact Us</Button>
       </div>
     </section>
   )

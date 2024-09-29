@@ -26,6 +26,11 @@ export default function TopPanel({ data }: TopPanelProps) {
   useEffect(() => {
     const image = imageRef.current
 
+    if (window.innerWidth < 1280) {
+      setIsAnimated(true)
+      return
+    }
+
     if (image) {
       image.addEventListener('transitionend', () => setIsAnimated(true))
       return () => image.removeEventListener('transitionend', () => setIsAnimated(true))
@@ -34,20 +39,22 @@ export default function TopPanel({ data }: TopPanelProps) {
     return
   }, [])
 
+
+
   return (
-    <section className='flex h-96 justify-start items-center w-full gap-x-8 bg-primary py-3 p-20 shadow-bottom mb-16'>
+    <section className='flex flex-col xl:flex-row mx-auto min-h-[30rem] max-h-fit justify-start xl:justify-center items-center w-full gap-x-8 bg-primary py-8 px-8 shadow-bottom mb-16'>
       <Image
         ref={imageRef}
         src={src}
         alt={alt}
         width={width}
         height={height}
-        className={`z-10 h-full object-cover w-[700px] rounded-lg transition-transform duration-700 ease-out ${isMount ? 'translate-x-[0%] opacity-100' : 'translate-x-[-120%] opacity-0'}`}
+        className={`z-10 h-full object-cover w-[700px] rounded-lg transition-transform duration-700 ease-out ${isMount ? 'xl:translate-x-[0%] xl:opacity-100' : 'xl:translate-x-[-120%] xl:opacity-0'}`}
       />
       <ArticleSnippetWithButton
         title={data.title}
         text={data.text}
-        transitionClasses={`opacity-0 transition-transform duration-500 ease-out ${isAnimated ? `translate-x-[0%] opacity-100` : `translate-x-[calc(-100%-32px)] `}`}
+        transitionClasses={`transition-transform duration-500 ease-out ${isAnimated ? `xl:translate-x-[0%] xl:opacity-100` : `xl:translate-x-[calc(-100%-32px)] xl:opacity-0`}`}
       />
     </section>
   )
