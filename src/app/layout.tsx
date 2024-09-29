@@ -5,6 +5,7 @@ import { Lato } from 'next/font/google'
 import Nav from '@/components/sections/shared/Nav'
 import Footer from '@/components/sections/shared/Footer'
 import { Toaster } from '@/components/ui/toaster'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const lato = Lato({
   weight: ["400", "700"],
