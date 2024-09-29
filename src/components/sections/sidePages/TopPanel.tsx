@@ -26,6 +26,11 @@ export default function TopPanel({ data }: TopPanelProps) {
   useEffect(() => {
     const image = imageRef.current
 
+    if (window.innerWidth < 1280) {
+      setIsAnimated(true)
+      return
+    }
+
     if (image) {
       image.addEventListener('transitionend', () => setIsAnimated(true))
       return () => image.removeEventListener('transitionend', () => setIsAnimated(true))
@@ -33,6 +38,8 @@ export default function TopPanel({ data }: TopPanelProps) {
 
     return
   }, [])
+
+
 
   return (
     <section className='flex flex-col xl:flex-row mx-auto min-h-[30rem] max-h-fit justify-start xl:justify-center items-center w-full gap-x-8 bg-primary py-8 px-8 shadow-bottom mb-16'>

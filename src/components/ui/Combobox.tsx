@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/popover"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 import { Path } from "react-hook-form"
+import { useState, useEffect, useRef } from "react"
 
 export type ComboboxItem = {
   value: string
@@ -51,16 +52,18 @@ export function Combobox<TFieldValues extends FieldValues>({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={cn("w-[200px] justify-center", className)}
+          className={cn('min-w-[200px]', className)}
         >
-          {field.value
-            ? items.find((item) => item.value === field.value)?.label
-            : label}
+          <span className="truncate">
+            {field.value
+              ? items.find((item) => item.value === field.value)?.label
+              : label}
+          </span>
           <FaCaretDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full">
-        <Command>
+      <PopoverContent className="max-w-72 sm:max-w-[360px] lg:max-w-[586px]">
+        <Command className="">
           {searchPlaceholder && <CommandInput placeholder={searchPlaceholder} />}
           <CommandList>
             {searchPlaceholder && <CommandEmpty>No {itemIdentifier} found.</CommandEmpty>}
