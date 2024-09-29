@@ -29,6 +29,7 @@ export default function RootLayout({ children }:
         <main>{children}</main>
         <Footer />
         <Toaster />
+        <SpeedInsights />
       </body>
     </html>
   )
