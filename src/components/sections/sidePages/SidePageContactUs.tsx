@@ -7,7 +7,7 @@ export default function SidePageContactUs() {
       <h2 className="text-5xl underline text-primary font-bold flex justify-center items-center">Contact Us</h2>
       <div className="flex gap-4 h-[450px] ">
         <div className="flex-[2] px-1 h-full">
-          <InputForm className="w-2/3" />
+          <InputForm className="lg:w-2/3" submitStyle="justify-center" />
         </div>
       </div>
     </section>

@@ -163,7 +163,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
               name='tel'
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel className="text-xl font-bold">{isMobileView ? 'Phone no.' : 'Phone Number'}</FormLabel>
+                  <FormLabel className="text-xl font-bold">{isMobileView ? 'Phone No.' : 'Phone Number'}</FormLabel>
                   <FormControl>
                     <Input className={`${isMobileView ? 'text-[0.9rem] p-2' : 'text-sm p-4'} border-2 border-primary`} type="tel" {...field} />
                   </FormControl>
@@ -193,7 +193,7 @@ export default function InputForm({ className = '', submitStyle = '' }: { classN
           />
         </div>
 
-        <Button disabled={isLoading || isSubmitting} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/2 lg:w-1/4 mx-auto lg:mx-0 lg:mr-auto bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>
+        <Button disabled={isLoading || isSubmitting} type="submit" action={form.handleSubmit(onSubmit)} className={`w-1/2 lg:w-1/4 mx-auto  bg-primary text-secondary hover:bg-secondary hover:text-primary border border-primary ` + submitStyle}>
           {isLoading || isSubmitting ? <span className="loading loading-spinner"></span> : null}
           {isSubmitting ? 'Submitting' : null}
           {isLoading ? 'Loading' : null}

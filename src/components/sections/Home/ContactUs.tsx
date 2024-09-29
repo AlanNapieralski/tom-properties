@@ -17,7 +17,7 @@ export default function ContactUs() {
           />
         </div>
         <div className="flex-[2] px-1 h-full">
-          <InputForm submitStyle="mr-auto" />
+          <InputForm submitStyle="lg:ml-0" />
         </div>
       </div>
     </section>
