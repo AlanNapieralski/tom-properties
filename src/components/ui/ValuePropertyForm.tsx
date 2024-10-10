@@ -8,8 +8,12 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Combobox } from './Combobox'
+<<<<<<< HEAD
 import { valuationTypes, propertyTypes, noOfBeds } from '@/models/valueProperty-content'
 import { getAddresses } from '@/actions/placesos'
+=======
+import { valuationTypes, propertyTypes, noOfBeds, addresses } from '@/models/valueProperty-content'
+>>>>>>> main
 import { useEffect, useState } from 'react'
 import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'

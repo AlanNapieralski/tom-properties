@@ -15,6 +15,10 @@ export const valuePropertyImage: ImageProps = {
 }
 
 export const title = 'Request an Valuation'
+<<<<<<< HEAD
+=======
+export const addresses = ['123 Baker Stree flakjsdl;kfjaslk;djf;laksdjfsd jklajfklasdj;lfkaj sd;lfkjft,  London,  NW1 6XE,  United Kingdom'].map(val => ({ label: val, value: val }))
+>>>>>>> main
 
 const propertyTypesOptions = [
   'example'
