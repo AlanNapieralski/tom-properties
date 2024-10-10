@@ -13,6 +13,7 @@ export default function ValueMyProperty() {
         alt={alt}
         width={width}
         height={height}
+        layout='responsive'
         className='sticky h-full inset-0 object-cover'
       />
       <div className='absolute inset-0 h-full bg-black opacity-80'></div>
