@@ -7,11 +7,13 @@ import Image from 'next/image'
 import SideNav from '@/components/ui/SideNav'
 import Button from '@/components/ui/CustomButton'
 import { Separator } from '@/components/ui/separator'
+import { useMediaQuery } from 'react-responsive'
 
 import { FC } from 'react'
 
 const Nav: FC = () => {
   const [isSticky, setIsSticky] = useState(false)
+  const isMobile = useMediaQuery({ maxWidth: 640 })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,11 +61,12 @@ const Nav: FC = () => {
           </div>
         </div>
 
-        <SideNav triggerButton={
+        <SideNav position={`${isMobile ? 'bottom' : 'right'}`} triggerButton={
           <button className='2xl:hidden group aspect-square h-full bg-secondary rounded border-none'>
             <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
           </button>
-        } />
+        }
+        />
       </nav>
     </header >
   )

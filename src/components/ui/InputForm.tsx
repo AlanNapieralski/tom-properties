@@ -9,7 +9,6 @@ import Button from "@/components/ui/CustomButton"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,7 +18,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { toast } from "@/hooks/use-toast"
-import { Loader2 } from "lucide-react"
 
 const FormSchema = z.object({
   name: z.string()

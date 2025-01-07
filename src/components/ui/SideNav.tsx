@@ -14,10 +14,11 @@ import { Separator } from "@/components/ui/separator"
 import React from "react"
 
 type SideNavProps = {
-  triggerButton: React.ReactNode
+  triggerButton: React.ReactNode,
+  position: "top" | "bottom" | "left" | "right"
 }
 
-export default function SideNav({ triggerButton }: SideNavProps) {
+export default function SideNav({ triggerButton, position }: SideNavProps) {
 
   const links = homeLink.concat(secondaryLinks, mainLinks)
 
@@ -26,7 +27,7 @@ export default function SideNav({ triggerButton }: SideNavProps) {
       <SheetTrigger asChild>
         {triggerButton}
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent side={position}>
         <SheetHeader>
           <SheetTitle className="text-2xl">{title}</SheetTitle>
         </SheetHeader>

@@ -1,27 +1,34 @@
-import {Ratelimit} from "@upstash/ratelimit";
-import {Redis} from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
 import { NextRequest, NextResponse } from "next/server";
- 
+
+
+const isProd = process.env.NODE_ENV === "production"
+
 const UPSTASH_REDIS_REST_URL = process.env.UPSTASH_REDIS_REST_URL
 const UPSTASH_REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN
- 
-const redis = new Redis({
-  url: UPSTASH_REDIS_REST_URL,
-  token: UPSTASH_REDIS_REST_TOKEN,
-})
- 
+
+const redis = isProd
+    ? new Redis({
+        url: UPSTASH_REDIS_REST_URL,
+        token: UPSTASH_REDIS_REST_TOKEN,
+    })
+    : new Redis({
+        url: UPSTASH_REDIS_REST_URL,
+        token: UPSTASH_REDIS_REST_TOKEN,
+    })
+
 // Create a new ratelimiter, that allows 3 requests per 24 hours per ip address
 const ratelimit = new Ratelimit({
-  redis: redis,
-  limiter: Ratelimit.fixedWindow(3, "1 d"),
+    redis: redis,
+    limiter: Ratelimit.fixedWindow(3, "1 d"),
 });
- 
+
 export async function middleware(req: NextRequest, res: NextResponse) {
     // Identifier could be user-specific or request-specific (e.g., API key, IP address, etc.)
-    console.log(req.headers)
     const original_uri = req.headers.get('x-original-uri')?.replaceAll('/', '') || ''
-    const identifier = original_uri + req.headers.get('x-forwarded-for') || "api";
+    const identifier = original_uri + req.headers.get('x-forwarded-for') || "api"; // FIX: idk if it's very secure
     const result = await ratelimit.limit(identifier as string);
 
     // Set rate limit headers
@@ -31,16 +38,16 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 
     // If rate limit exceeded, return 429 status
     if (!result.success) {
-      return NextResponse.json({ error: { errorMessage: "Please try again later."}, title: "You've reached daily maximum of 3 messages", rateLimitState: result }, { status: 429 });
+        return NextResponse.json({ error: { errorMessage: "Please try again later." }, title: "You've reached daily maximum of 3 messages", rateLimitState: result }, { status: 429 });
     }
 
     return NextResponse.next({
-      request: {
-        headers: newHeaders
-      }
+        request: {
+            headers: newHeaders
+        }
     })
 }
 
 export const config = {
-  matcher: ['/api/sendForm', '/api/sendValueForm'],
+    matcher: ['/api/sendForm', '/api/sendValueForm'],
 }

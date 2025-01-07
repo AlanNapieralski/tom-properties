@@ -23,8 +23,8 @@ export default function RootLayout({ children }:
   }) {
 
   return (
-    <html lang="en" className='scroll-smooth'>
-      <body className={lato.className + " sm:!pt-24 tracking-wider"}>
+    <html lang="en" className='scroll-smooth bg-primary'>
+      <body className={lato.className + " sm:!pt-24 tracking-wider "}>
         <Nav />
         <main>{children}</main>
         <Footer />
