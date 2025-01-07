@@ -11,7 +11,7 @@ import { homeLink, mainLinks, secondaryLinks } from "@/models/navigation-links"
 import { title } from "@/models/site-metadata"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
-import React from "react"
+import React, { CSSProperties, useEffect, useState } from "react"
 
 type SideNavProps = {
   triggerButton: React.ReactNode,
@@ -20,14 +20,20 @@ type SideNavProps = {
 
 export default function SideNav({ triggerButton, position }: SideNavProps) {
 
+  const [pointerEvent, setPointerEvent] = useState<CSSProperties["pointerEvents"]>("auto")
+
   const links = homeLink.concat(secondaryLinks, mainLinks)
+
+  const handleAnimationStart = () => {
+    setPointerEvent((prev) => (prev === "auto" ? "none" : "auto"));
+  }
 
   return (
     <Sheet>
       <SheetTrigger asChild>
         {triggerButton}
       </SheetTrigger>
-      <SheetContent side={position}>
+      <SheetContent onAnimationStart={handleAnimationStart} side={position} style={{ pointerEvents: pointerEvent }}>
         <SheetHeader>
           <SheetTitle className="text-2xl">{title}</SheetTitle>
         </SheetHeader>
