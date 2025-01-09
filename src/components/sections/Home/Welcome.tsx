@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { welcome, welcomeImages as images } from '@/models/home-content'
+import { welcome, welcomeImages as images } from '@/models/content/home-content'
 
 export default function Welcome() {
 

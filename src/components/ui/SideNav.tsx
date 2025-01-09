@@ -11,7 +11,7 @@ import { homeLink, mainLinks, secondaryLinks } from "@/models/navigation-links"
 import { title } from "@/models/site-metadata"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
-import React, { CSSProperties, useEffect, useState } from "react"
+import React, { CSSProperties, useState } from "react"
 
 type SideNavProps = {
   triggerButton: React.ReactNode,

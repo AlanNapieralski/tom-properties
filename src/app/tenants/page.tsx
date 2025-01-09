@@ -1,6 +1,6 @@
 import TopPanel from "@/components/sections/sidePages/TopPanel"
 import SidePageContactUs from "@/components/sections/sidePages/SidePageContactUs"
-import { tenantInfo } from "@/models/tenant-content"
+import { tenantInfo } from "@/models/content/tenant-content"
 
 export default function Tenants() {
 

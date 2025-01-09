@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Combobox } from './Combobox'
-import { valuationTypes, propertyTypes, noOfBeds, addresses } from '@/models/valueProperty-content'
+import { valuationTypes, propertyTypes, noOfBeds } from '@/models/content/valueProperty-content'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'
@@ -20,6 +20,10 @@ export default function ValuePropertyForm({ className = '' }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isClicked, setIsClicked] = useState(false)
+  const [addresses, setAddresses] = useState<{ label: string, value: string }[]>([{
+    label: '',
+    value: '',
+  }])
 
   useEffect(() => {
     setIsLoading(false)
@@ -33,6 +37,9 @@ export default function ValuePropertyForm({ className = '' }) {
       .min(1, { message: "Email is required" })
       .email({ message: "Must be email format: example@email.com" }),
     selAddress: z.string({
+      required_error: "Please select the address.",
+    }),
+    selNumber: z.string({
       required_error: "Please select the address.",
     }),
     bedsNo: z.string({
@@ -50,9 +57,29 @@ export default function ValuePropertyForm({ className = '' }) {
     resolver: zodResolver(FormSchema),
   })
 
-  const { handleSubmit, formState: { errors }, trigger, reset } = form;
+  const { handleSubmit, formState: { errors }, trigger, reset, getValues } = form;
 
   const { toast } = useToast()
+
+  async function onEnterPostcode() {
+    try {
+      const response: Response = await fetch('/api/getAddresses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          textQuery: getValues("postcode"),
+        }),
+      });
+      const res: string[] = await response.json()
+      const formattedAddresses: { label: string, value: string }[] = res.map(addr => ({ label: addr, value: addr })) // label and value
+      setAddresses(formattedAddresses)
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  }
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsSubmitting(true)
@@ -138,22 +165,41 @@ export default function ValuePropertyForm({ className = '' }) {
           <Button disabled={isLoading} buttonType='button' theme='dark' action={(e) => {
             e.preventDefault()
             trigger('postcode').then(val => val ? setIsClicked(true) : null)
+            onEnterPostcode()
           }} className="col-start-1 sm:col-start-2 lg:col-start-3 col-span-full sm:col-span-2">Find address</Button>
 
-          {isClicked ? <FormField
-            control={form.control}
-            name="selAddress"
-            render={({ field }) => (
-              <FormItem className='col-span-full lg:col-span-4'>
-                <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Address</FormLabel>
-                <FormControl>
-                  <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={addresses} className='w-full overflow-x-hidden' field={field} />
-                </FormControl>
-                <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
-              </FormItem>
-            )}
-          /> : null}
-
+          <div className='flex col-span-full gap-4 items-end'>
+            {isClicked ?
+              <>
+                <FormField
+                  control={form.control}
+                  name="selNumber"
+                  render={({ field }) => (
+                    <FormItem className='w-20 flex-shrink-0'>
+                      <FormLabel className="text-xs font-bold text-secondary m-2 flex">House No.</FormLabel>
+                      <FormControl>
+                        <Input className='w-full overflow-x-hidden text-center' {...field} />
+                      </FormControl>
+                      <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="selAddress"
+                  render={({ field }) => (
+                    <FormItem className='flex-grow'>
+                      <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Address</FormLabel>
+                      <FormControl>
+                        <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={addresses} className='w-full overflow-x-hidden' field={field} />
+                      </FormControl>
+                      <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
+                    </FormItem>
+                  )}
+                />
+              </>
+              : null}
+          </div>
           <FormField
             control={form.control}
             name="bedsNo"

@@ -4,7 +4,7 @@ import InputForm from "@/components/ui/InputForm"
 export default function ContactUs() {
 
   return (
-    <section id="contact-us" className="flex flex-col gap-8 w-full pb-16 pt-16">
+    <section id="contact-us" className="flex flex-col gap-8 w-full py-20">
       <h2 className="text-4xl font-bold text-center drop-shadow-lg underline">Contact Us</h2>
       <div className="flex gap-4 h-[450px] ">
         <div className="flex-1 h-full hidden lg:block">

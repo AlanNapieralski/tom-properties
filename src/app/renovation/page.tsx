@@ -1,6 +1,6 @@
 import TopPanel from "@/components/sections/sidePages/TopPanel"
 import SidePageContactUs from "@/components/sections/sidePages/SidePageContactUs"
-import { renovationInfo } from "@/models/renovation-content"
+import { renovationInfo } from "@/models/content/renovation-content"
 
 export default function Renovation() {
 

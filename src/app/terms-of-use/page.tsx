@@ -1,6 +1,6 @@
 import { title } from "@/models/site-metadata"
 import ArticleSection from "@/components/sections/sidePages/ArticleSection"
-import { articles } from "@/models/termsofuse-content"
+import { articles } from "@/models/content/termsofuse-content"
 
 export default function TermsOfUse() {
 

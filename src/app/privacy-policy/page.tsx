@@ -1,6 +1,6 @@
 import { title } from "@/models/site-metadata"
 import ArticleSection from "@/components/sections/sidePages/ArticleSection"
-import { articles } from "@/models/privacy-content"
+import { articles } from "@/models/content/privacy-content"
 
 export default function Privacy() {
 

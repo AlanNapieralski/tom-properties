@@ -19,11 +19,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-      return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later'}, title: "Could not send the email" }, { status: 500})
+      return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later' }, title: "Could not send the email" }, { status: 500 })
     }
 
     return Response.json({ data });
   } catch (error) {
-    return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later'}, title: "Could not send the email" }, { status: 500})
+    return Response.json({ error: { errorBody: error, errorMessage: 'Please try again later' }, title: "Could not send the email" }, { status: 500 })
   }
 }

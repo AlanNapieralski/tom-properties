@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { aboutUs } from "@/models/home-content";
+import { aboutUs } from "@/models/content/home-content";
 import Button from '@/components/ui/CustomButton'
 
 export default function AboutUs() {
   return (
-    <section id='about-us' className="flex flex-col lg:flex-row mb-16 gap-8 mt-16">
+    <section id='about-us' className="flex flex-col lg:flex-row gap-8 py-20">
       <div className="lg:flex-1 w-full h-64 md:h-80 lg:h-96">
         <Image
           src='/assets/images/aboutus.jpg'

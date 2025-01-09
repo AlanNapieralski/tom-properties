@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { welcomeImages as image } from '@/models/home-content'
+import { welcomeImages as image } from '@/models/content/home-content'
 import { useEffect, useState, useRef } from 'react'
 import ArticleSnippetWithButton from '@/components/ui/ArticleSnippetWithButton'
 
