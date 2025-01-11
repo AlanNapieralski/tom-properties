@@ -36,10 +36,10 @@ export default function ValuePropertyForm({ className = '' }) {
     email: z.string()
       .min(1, { message: "Email is required" })
       .email({ message: "Must be email format: example@email.com" }),
-    selAddress: z.string({
+    inputAddress: z.string({
       required_error: "Please select the address.",
     }),
-    selNumber: z.string({
+    address: z.string({
       required_error: "Please select the address.",
     }),
     bedsNo: z.string({
@@ -168,38 +168,37 @@ export default function ValuePropertyForm({ className = '' }) {
             onEnterPostcode()
           }} className="col-start-1 sm:col-start-2 lg:col-start-3 col-span-full sm:col-span-2">Find address</Button>
 
-          <div className='flex col-span-full gap-4 items-end'>
-            {isClicked ?
-              <>
-                <FormField
-                  control={form.control}
-                  name="selNumber"
-                  render={({ field }) => (
-                    <FormItem className='w-20 flex-shrink-0'>
-                      <FormLabel className="text-xs font-bold text-secondary m-2 flex">House No.</FormLabel>
-                      <FormControl>
-                        <Input className='w-full overflow-x-hidden text-center' {...field} />
-                      </FormControl>
-                      <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="selAddress"
-                  render={({ field }) => (
-                    <FormItem className='flex-grow'>
-                      <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Address</FormLabel>
-                      <FormControl>
-                        <Combobox label='Select Addresses' searchPlaceholder='Search for addresses' itemIdentifier='addresses' items={addresses} className='w-full overflow-x-hidden' field={field} />
-                      </FormControl>
-                      <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
-                    </FormItem>
-                  )}
-                />
-              </>
-              : null}
-          </div>
+          {isClicked ?
+            <div className='flex flex-col col-span-full items-center gap-4'>
+              <FormField
+                control={form.control}
+                name="inputAddress"
+                render={({ field }) => (
+                  <FormItem className='w-auto items-center min-w-[200px]'>
+                    <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">House Number / Name</FormLabel>
+                    <FormControl>
+                      <Input className='text-center' type='text' {...field} />
+                    </FormControl>
+                    <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem className='w-full col-span-full truncate'>
+                    <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Address</FormLabel>
+                    <FormControl>
+                      <Input className='text-center' type='text' defaultValue={addresses[0].value} {...field} />
+                    </FormControl>
+                    <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
+                  </FormItem>
+                )}
+              />
+            </div>
+            : null}
+
           <FormField
             control={form.control}
             name="bedsNo"

@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/popover"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 import { Path } from "react-hook-form"
-import { useState, useEffect, useRef } from "react"
 
 export type ComboboxItem = {
   value: string
