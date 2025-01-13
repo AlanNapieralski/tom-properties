@@ -9,7 +9,7 @@ import { z } from "zod"
 
 import { Combobox } from './Combobox'
 import { valuationTypes, propertyTypes, noOfBeds } from '@/models/content/valueProperty-content'
-import { forwardRef, LegacyRef, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'
 
@@ -17,7 +17,7 @@ type ValuePropertyFormProps = {
   className: string
 }
 
-const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({ className }, ref) => {
+const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({ className }, formRef) => {
 
   const router = useRouter()
 
@@ -28,6 +28,12 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
     label: '',
     value: '',
   }])
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const changeInputValue = (newVal: string) => {
+    if (inputRef.current) {
+      inputRef.current.value = newVal
+    }
+  }
 
   useEffect(() => {
     setIsLoading(false)
@@ -61,7 +67,7 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
     resolver: zodResolver(FormSchema),
   })
 
-  const { handleSubmit, formState: { errors }, trigger, reset, getValues } = form;
+  const { handleSubmit, formState: { errors }, trigger, reset, getValues, register, setValue } = form;
 
   const { toast } = useToast()
 
@@ -75,10 +81,13 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
         body: JSON.stringify({
           textQuery: getValues("postcode"),
         }),
-      });
+      })
+
       const res: string[] = await response.json()
       const formattedAddresses: { label: string, value: string }[] = res.map(addr => ({ label: addr, value: addr })) // label and value
       setAddresses(formattedAddresses)
+
+      setValue('address', res[0])
 
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -136,7 +145,7 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
   return (
     <Form {...form} >
 
-      <form ref={ref} onSubmit={handleSubmit(onSubmit)} className={`flex flex-col justify-center items-center ` + className} noValidate>
+      <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className={`flex flex-col justify-center items-center ` + className} noValidate>
         <h1 className='text-center text-4xl sm:text-5xl text-secondary font-bold mb-4 sm:mb-8'>Let us valuate your property</h1>
 
         <div className='grid grid-cols-4 gap-y-2 sm:gap-y-4 gap-x-12 items-start w-full'>
@@ -194,7 +203,7 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
                   <FormItem className='w-full col-span-full truncate'>
                     <FormLabel className="font-bold text-secondary m-2 flex justify-center items-end">Property Address</FormLabel>
                     <FormControl>
-                      <Input className='text-center' type='text' defaultValue={addresses[0].value} {...field} />
+                      <Input id='address' className='text-center' type='text' defaultValue={addresses[0].value} {...field} />
                     </FormControl>
                     <FormMessage className="font-bold pt-1 text-xs sm:text-sm" />
                   </FormItem>
