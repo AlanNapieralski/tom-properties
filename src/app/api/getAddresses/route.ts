@@ -47,7 +47,6 @@ const POST = async (req: NextRequest) => {
 
         const data: GooglePlacesAPIResponse = await res.json();
         const formattedData = data.results.map(result => result.formatted_address)
-
         return Response.json(formattedData);
 
     } catch (error: unknown) {

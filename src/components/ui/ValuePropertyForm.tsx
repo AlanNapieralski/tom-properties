@@ -9,11 +9,15 @@ import { z } from "zod"
 
 import { Combobox } from './Combobox'
 import { valuationTypes, propertyTypes, noOfBeds } from '@/models/content/valueProperty-content'
-import { useEffect, useState } from 'react'
+import { forwardRef, LegacyRef, useEffect, useState } from 'react'
 import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'
 
-export default function ValuePropertyForm({ className = '' }) {
+type ValuePropertyFormProps = {
+  className: string
+}
+
+const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({ className }, ref) => {
 
   const router = useRouter()
 
@@ -132,7 +136,7 @@ export default function ValuePropertyForm({ className = '' }) {
   return (
     <Form {...form} >
 
-      <form onSubmit={handleSubmit(onSubmit)} className={`flex flex-col justify-center items-center ` + className} noValidate>
+      <form ref={ref} onSubmit={handleSubmit(onSubmit)} className={`flex flex-col justify-center items-center ` + className} noValidate>
         <h1 className='text-center text-4xl sm:text-5xl text-secondary font-bold mb-4 sm:mb-8'>Let us valuate your property</h1>
 
         <div className='grid grid-cols-4 gap-y-2 sm:gap-y-4 gap-x-12 items-start w-full'>
@@ -250,4 +254,6 @@ export default function ValuePropertyForm({ className = '' }) {
       </form>
     </Form >
   )
-}
+})
+
+export default ValuePropertyForm
