@@ -27,7 +27,7 @@ const ratelimit = new Ratelimit({
 
 export async function middleware(req: NextRequest, res: NextResponse) {
     // Identifier could be user-specific or request-specific (e.g., API key, IP address, etc.)
-    const original_uri = req.headers.get('x-original-uri')?.replaceAll('/', '') || ''
+    const original_uri = req.nextUrl.pathname?.replaceAll('/', '') || '' //WARNING:provided a fix but not sure if sufficient
     const identifier = original_uri + req.headers.get('x-forwarded-for') || "api"; // FIX: idk if it's very secure
     const result = await ratelimit.limit(identifier as string);
 
@@ -49,5 +49,5 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 }
 
 export const config = {
-    matcher: ['/api/sendForm', '/api/sendValueForm'],
+    matcher: ['/api/sendForm', '/api/sendValueForm', '/api/getAddresses'],
 }
