@@ -19,7 +19,6 @@ const redis = isProd
         token: UPSTASH_REDIS_REST_TOKEN,
     })
 
-// Create a new ratelimiter, that allows 3 requests per 24 hours per ip address
 const ratelimit = new Ratelimit({
     redis: redis,
     limiter: Ratelimit.fixedWindow(3, "1 d"),
@@ -27,10 +26,11 @@ const ratelimit = new Ratelimit({
 
 export async function middleware(req: NextRequest, res: NextResponse) {
     // Identifier could be user-specific or request-specific (e.g., API key, IP address, etc.)
-    const original_uri = req.nextUrl.pathname?.replaceAll('/', '') || '' //WARNING:provided a fix but not sure if sufficient
-    const identifier = original_uri + req.headers.get('x-forwarded-for') || "api"; // FIX: idk if it's very secure
+    const original_uri = req.nextUrl.pathname?.replaceAll('/', '') || ''
+    const identifier = original_uri + req.headers.get('x-forwarded-for') || "api";
     const result = await ratelimit.limit(identifier as string);
 
+    console.log(req.body)
     // Set rate limit headers
     const newHeaders = new Headers(req.headers)
     newHeaders.set('X-RateLimit-Limit', result.limit.toString())

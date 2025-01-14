@@ -1,19 +1,21 @@
 import * as React from 'react';
 
 export type ValuationEmailTemplateProps = {
-  selAddress: string
   email: string
   bedsNo: string
   propertyType: string
   valType: string
+  address: string
+  inputAddress: string
 }
 
 export const ValuationEmailTemplate: React.FC<Readonly<ValuationEmailTemplateProps>> = ({
-  selAddress,
+  inputAddress,
   email,
   bedsNo,
   propertyType,
-  valType
+  valType,
+  address
 }) => (
   <div>
     <p>
@@ -22,7 +24,7 @@ export const ValuationEmailTemplate: React.FC<Readonly<ValuationEmailTemplatePro
     </p>
     <p>
       <span style={{ fontWeight: 'bold' }}>Address: </span>
-      <span>{selAddress}</span>
+      <span>{inputAddress} {address}</span>
     </p>
     <p>
       <span style={{ fontWeight: 'bold' }}>Number of beds: </span>

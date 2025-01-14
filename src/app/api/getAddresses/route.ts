@@ -50,7 +50,6 @@ const POST = async (req: NextRequest) => {
         return Response.json(formattedData);
 
     } catch (error: unknown) {
-        // Handle unexpected errors
         let errorMessage = 'An unknown error occurred';
 
         if (error instanceof Error) {

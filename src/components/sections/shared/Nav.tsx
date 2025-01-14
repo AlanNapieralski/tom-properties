@@ -51,7 +51,7 @@ const Nav: FC = () => {
           </div>
           <div className="hidden flex-grow 2xl:flex justify-center items-center gap-x-4 h-full">
             {secondaryLinks.map((item, index) => {
-              return item.name === 'divi' ? <Separator key={index} orientation='vertical' className='border-[1px] rounded-md border-primary'></Separator> : <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name}</Button>
+              return item.name === 'divi' ? <Separator key={index} orientation='vertical' className='border-[1px] rounded-md border-primary'></Separator> : <Button key={index} buttonType='link' action={item.url} theme={item.theme} className='h-full'>{item.name} </Button>
             })}
           </div>
           <div className="hidden flex-grow md:flex justify-center items-center gap-x-4 h-full">
@@ -62,7 +62,7 @@ const Nav: FC = () => {
         </div>
 
         <SideNav position={`${isMobile ? 'bottom' : 'right'}`} triggerButton={
-          <button className='2xl:hidden group aspect-square h-full bg-secondary rounded border-none'>
+          <button name='burger menu' className='2xl:hidden group aspect-square h-full bg-secondary rounded border-none'>
             <FontAwesomeIcon icon={faBars} width={48} className='h-full' />
           </button>
         }

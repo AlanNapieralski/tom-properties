@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { fullTitle, description } from "@/models/site-metadata"
+import Link from "next/link"
 
 export default function Footer({ className = "" }) {
   return (
@@ -7,22 +8,22 @@ export default function Footer({ className = "" }) {
       <footer className={"relative flex justify-around items-center bg-primary text-secondary px-4 sm:px-10 py-10 z-50 " + className}>
         <div className="footer grid-flow-col justify-center gap-8 sm:gap-16">
           <nav>
-            <h6 className="footer-title">Services</h6>
-            <a href="/landlords" className="link link-hover">For Landlords</a>
-            <a href="tenants" className="link link-hover">For tenants</a>
-            <a href="investors" className="link link-hover">For investors</a>
-            <a href="value-my-property" className="link link-hover">Value my Property</a>
+            <h3 className="footer-title">Services</h3>
+            <Link href="/landlords" className="link link-hover">For Landlords</Link>
+            <Link href="tenants" className="link link-hover">For tenants</Link>
+            <Link href="investors" className="link link-hover">For investors</Link>
+            <Link href="value-my-property" className="link link-hover">Value my Property</Link>
           </nav>
           <nav>
-            <h6 className="footer-title">Company</h6>
-            <a href="/#about-us" className="link link-hover">About us</a>
-            <a href="/#contact-us" className="link link-hover">Contact</a>
+            <h3 className="footer-title">Company</h3>
+            <Link href="/#about-us" className="link link-hover">About us</Link>
+            <Link href="/#contact-us" className="link link-hover">Contact</Link>
           </nav>
           <nav>
-            <h6 className="footer-title">Legal</h6>
-            <a href="terms-of-use" className="link link-hover">Terms of use</a>
-            <a href="privacy-policy" className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
+            <h3 className="footer-title">Legal</h3>
+            <Link href="terms-of-use" className="link link-hover">Terms of use</Link>
+            <Link href="privacy-policy" className="link link-hover">Privacy policy</Link>
+            <Link href="" className="link link-hover">Cookie policy</Link>
           </nav>
         </div>
         <Image
