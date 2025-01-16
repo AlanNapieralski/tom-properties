@@ -24,16 +24,6 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
     const [isLoading, setIsLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isClicked, setIsClicked] = useState(false)
-    const [addresses, setAddresses] = useState<{ label: string, value: string }[]>([{
-        label: '',
-        value: '',
-    }])
-    const inputRef = useRef<HTMLInputElement | null>(null)
-    const changeInputValue = (newVal: string) => {
-        if (inputRef.current) {
-            inputRef.current.value = newVal
-        }
-    }
 
     useEffect(() => {
         setIsLoading(false)
@@ -93,12 +83,11 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
             })
 
             const body: string[] = await response.json()
-            const formattedAddresses: { label: string, value: string }[] = body.map(addr => ({ label: addr, value: addr })) // label and value
-            setAddresses(formattedAddresses)
 
             setValue('address', body[0])
 
-            if (!response.ok) {
+            if (!response.ok && response.status === 429) {
+                console.log(response)
                 toast({
                     title: 'Too many tries',
                     description: 'Please put the address manually',
@@ -196,11 +185,24 @@ const ValuePropertyForm = forwardRef<HTMLFormElement, ValuePropertyFormProps>(({
                             </FormItem>
                         )}
                     />
-                    <Button disabled={isLoading} buttonType='button' theme='dark' action={(e) => {
-                        e.preventDefault()
-                        trigger('postcode').then(val => val ? setIsClicked(true) : null)
-                        onEnterPostcode()
-                    }} className="col-start-1 sm:col-start-2 lg:col-start-3 col-span-full sm:col-span-2">Find address</Button>
+                    <Button
+                        disabled={isLoading}
+                        buttonType="button"
+                        theme="dark"
+                        action={async (e) => {
+                            e.preventDefault();
+                            try {
+                                const val = await trigger('postcode')
+                                if (val) {
+                                    setIsClicked(true)
+                                    onEnterPostcode()
+                                }
+                            } catch (error) {
+                                console.error("Error triggering postcode:", error)
+                            }
+                        }}
+                        className="col-start-1 sm:col-start-2 lg:col-start-3 col-span-full sm:col-span-2">Find address
+                    </Button>
 
                     {isClicked ?
                         <div className='flex flex-col col-span-full items-center gap-4'>

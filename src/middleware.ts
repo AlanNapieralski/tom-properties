@@ -3,7 +3,6 @@ import { Redis } from "@upstash/redis";
 
 import { NextRequest, NextResponse } from "next/server";
 
-
 const isProd = process.env.NODE_ENV === "production"
 
 const UPSTASH_REDIS_REST_URL = process.env.UPSTASH_REDIS_REST_URL
@@ -30,7 +29,6 @@ export async function middleware(req: NextRequest, res: NextResponse) {
     const identifier = original_uri + req.headers.get('x-forwarded-for') || "api";
     const result = await ratelimit.limit(identifier as string);
 
-    console.log(req.body)
     // Set rate limit headers
     const newHeaders = new Headers(req.headers)
     newHeaders.set('X-RateLimit-Limit', result.limit.toString())
