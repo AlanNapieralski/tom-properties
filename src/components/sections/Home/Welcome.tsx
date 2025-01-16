@@ -24,6 +24,7 @@ export default function Welcome() {
             <Image
               key={idx}
               {...img}
+              alt={img.alt}
               className={`absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-2000 ease-in-out ${index === idx ? "opacity-100" : "opacity-0"}`}
               priority
             />
