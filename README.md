@@ -3,7 +3,9 @@ Website for the client involved in real estate. Currently, isn't populated with 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-A simple real estate service presentation website.
+A simple real estate service presentation website, with a form implemented to contact the client.
+- The submission information from the form is directly emailed to the client to facilitate communication without the need of any external communication system.
+- The website has been build in close collabration with the client and have implemented every design choice and feature requested
 
 
 <!-- BUILT WITH -->
